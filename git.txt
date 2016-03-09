@@ -24,3 +24,10 @@ git log --author="pritesh"
 git log --grep="initial"
 
 head information in ./.git/HEAD which refers to ./.git/refs/heads/master
+View the changes in the working directory:
+git diff 
+git diff filename
+
+view the changes in the staging area:
+git diff --staged   (--cached in versions earlier than v1.6, also available in newer version)
+
