@@ -38,3 +38,4 @@ STEP_2> git commit -m "i will find you and i will kill you"
 
 Moving and renaming files:
 git mv abc.txt def.txt
+git commit -m "good luck"  # NOTE: if you delete/move the file directly using OS, then stage them yourself. 
