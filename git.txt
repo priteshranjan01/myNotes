@@ -13,6 +13,14 @@ GIT Configuration:
 GIT Auto-Completion: Look on web, how to configure in linux. Already available in windows
 Initializing a repository:
 git init 
-git add
+git add  # Have to do this every time, before a commit
 git commint -m "first commit"  # Always write commit message in present tense
 git status
+git log  
+git log -n 2  # returns the 2 latest commits
+git log --since=2016-01-10
+git log --until=2016-01-10
+git log --author="pritesh"
+git log --grep="initial"
+
+head information in ./.git/HEAD which refers to ./.git/refs/heads/master
