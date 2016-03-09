@@ -14,4 +14,5 @@ GIT Auto-Completion: Look on web, how to configure in linux. Already available i
 Initializing a repository:
 git init 
 git add
-git commint -m "first commit"
+git commint -m "first commit"  # Always write commit message in present tense
+git status
