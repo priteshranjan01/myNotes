@@ -31,3 +31,10 @@ git diff filename
 view the changes in the staging area:
 git diff --staged   (--cached in versions earlier than v1.6, also available in newer version)
 
+Deleting files:
+STEP_1> git rm filename.txt  # this will completely delete the file and add that to the staging area/index
+git 
+STEP_2> git commit -m "i will find you and i will kill you"
+
+Moving and renaming files:
+git mv abc.txt def.txt
