@@ -1,0 +1,170 @@
+BASH Lynda.com
+
+    $> touch file_{1..1000}
+    $> touch file_{01..1000}
+    $> echo {1..10..3}
+    $> echo {A..z}
+    $> touch {apple,banana,cherry,durian}_{01..100}{w...d} 
+    $> cp * ../otherfolder 1> ../success.txt ../error.txt  # Redirect standard output(1) messages to success.txt and standard error(2) messages to error.txt. & means both std output and std error
+    $> ll > /dev/null
+learn more about grep, awk, sed, and cut
+    $> grep --color=auto search_term file_name
+    $> grep -i search_term file_name | awk {'print  $12'}  # -i for case insensitive search
+    #!/bin/bash is called interpreter directive, or hashbang line or shebang
+    # comments
+    # '' are strong quotes. You get whatever you typed inside it i.e. nothing inside the quotes gets interpreted. While in "", variables can be replaced with their values.
+    # REMEMBER: spaces matter a lot inside expressions. 
+    $cat /dev/null > ~/.bash_history && history -c && exit  # Clears your bash history
+    $declare -i d=4  # i for integer, -r for read_only, -l for lowercase, -u for uppercase
+    $echo $MACHTYPE
+    $ echo $HOSTNAME
+    $ d=(pwd)
+    # ((expression)) to evaluate an expression. + - * / ++ -- += etc are available. 
+    $> d=$((3/4))  # d will contain 0
+    $> d=$(echo 1/2 | bc -l)  # d will be 0.500000
+    # Equality check, [[ expression ]]  # Don't forget the blank space before and after expression
+    # NOTE: in bash 1 means FALSE, 0 means TRUE
+    # String comparision operators , [[ $a == $b ]], != , <, <=, >, >= 
+    # numeric comparision operators [[ 44 -eq 55]], -ne, -lt, -le, -gt, -ge
+    # logical operators [[ $a && $b ]], || , ! 
+    # String null value -z to check is Null, -n to check not null. eg. [[ -z $a ]] , [[ -n $a ]] NOTE: empty string shall be treated as null by bash
+    # String concatenation, a='hello' // b='world'  // c=$a$b  // echo $c //  echo ${#c}  //  d=${c:3}  //e=${c:3:4}  //f=${c: -4:3}
+    # String replacement, 
+    $> fruit = "apple banana banana cherry"
+    $> echo ${fruit/banana/cherry}  # Replaces first occurance of banana with cherry
+    $> echo ${fruit//banana/litchi}  # Replaces all occurance of banana with cherry
+    $> echo ${fruit/#banana/litchi}  # Replaces banana with litchi only if banana is at the begining of fruit
+    $> echo ${fruit/%banana/litchi  # Replaces banana with litch only if banana is at the end of fruit
+    # Coloring and styling text in bash, look for them on the web. Although it's quite tedious nonetheless it's cool.
+    # Explore printf and date 
+    # Arrays in bash: 
+    a=()
+    b=("apple" "banana" "cherry") # NOTE: No commas in between, and these are zero indexed. 
+    echo ${b[2]}  # cherry
+    NOTE: you can assign b[8]="pritesh", this would be an error in any language(that i know of)
+    echo ${b[@]} # {prints the whole array 'b'
+ASSOCIATIVE ARRAYS are similar to python dicts
+    # Reading and writing text files (no binary files, Please !) 
+    append/write  > adds, >> appends
+    $> while read f; echo $f; done; < ./thisFile.txt
+    HERE Document: read about this. 
+
+Control Statements: 
+if else elif fi
+
+a=5
+if [ $a -gt 4]; then
+    echo $a is greater than 4
+else
+    echo $a is not greater than 4
+fi
+
+b="This is my string!"
+if [[ $a == [0-9]+ ]]; then 
+    echo "there are numbers in the string: $a"
+else
+    echo "there are no numbers in the string: $a"
+fi
+
+i=0
+while [ $i -le 10 ]; do
+        echo 1:$i
+        ((i+=1))
+done
+
+j=0
+until [ $j -ge 10 ]; do
+        echo 1:$i
+        ((i+=1))
+done
+
+for i in 1 2 3
+do 
+    echo $i
+done
+
+for i in {1..100..2}
+do 
+    echo $i
+done
+
+for (( i=1; i<=10; i++ ))
+do 
+    echo $i
+done
+
+for i in $(ls)
+do 
+    echo "$i"
+done
+
+
+CASE:
+
+a="dog"
+
+case $a in 
+    cat) echo "Feline";;
+    dog|puppy) echo "Canine";;
+    *) echo "no match";;
+esac
+
+
+Functions:
+
+function greet {
+    echo "hi there $1"
+}
+
+echo 'and now a greeting"
+greet scott
+
+
+function numberthings {
+    i=1
+    for f in $@; do
+            echo $i: $f
+            ((i+=1))
+}
+
+numberthings $(ls)
+
+
+$@ contains all the arguments specified at the command line
+$# is the count of the number of command line arguments
+
+
+Working with flags
+
+while getopts :u:p:ab option; do
+    case $option in 
+        u) user=$OPTARG;;
+        p) pass=$OPTARG;;
+        a) echo "Got the a flag"
+        b) echo "got the b flag"
+        ?) echo "I don't know what $OPTARG is ";;
+    esac
+done
+
+$> ./script.sh -p secret -u user -z -a 
+
+Use the getopts function. 
+ u:p:, means I'm looking for a dash u and a dash p. So I'm using the case statement using option as a variable and when that option matches u, it sets user equal to OPTARG, which is the value that's passed in from the user following dash u at the command line. 
+
+ This string like I have it with a colon after each flag, means that I expect there to be a value along with each flag.
+
+If I add other flags, without colons after them. That means I just want to know whether or not that flag was used. So I'll add a and b there and then I'll update my case statement. And I'll run this, first without any flags. And then with one of the flags, dash A, and I see Got the A flag. I can also do that with B for Got the B flag, and I can do both, Got the B flag, Got the A flag. 
+Adding a colon on the beginning tells bash that I want to know about flags that were used at the command line that I haven't specified.
+
+And in the case statement I will use question mark to capture that.      
+
+------------------------------------------------------------------------------------------------------------
+read input --> To take user input while running the bash script
+read -s password --> read silently, without displaying the typed characters
+read -p "Supp?" supp; echo $supp   
+
+$> select animal in a b c d e; do  echo "you selected $animal"; break; done  # run this command and you will know why this is cool. select 1 
+
+
+ENSURING AN INPUT
+if [ $# -lt 3 ] 

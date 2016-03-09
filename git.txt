@@ -1,0 +1,17 @@
+GIT Configuration:
+    System level: git config --system
+    user level: git config --global
+    project level: git config
+    
+    git config --user.name "pritesh ranjan"
+    git config --user.email "priteshranjantrivedi@gmail.com"
+    git config --list
+    git config user.email
+    git config --global core.editor "vim"
+    git config --global color.ui true
+
+GIT Auto-Completion: Look on web, how to configure in linux. Already available in windows
+Initializing a repository:
+git init 
+git add
+git commint -m "first commit"
