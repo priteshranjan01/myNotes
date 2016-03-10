@@ -15,6 +15,7 @@ Initializing a repository:
 git init 
 git add  # Have to do this every time, before a commit
 git commint -m "first commit"  # Always write commit message in present tense
+git commit -a -m "Commits by taking a shortcutting git stage step. Don't use this"  
 git status
 git log  
 git log -n 2  # returns the 2 latest commits
@@ -27,7 +28,7 @@ head information in ./.git/HEAD which refers to ./.git/refs/heads/master
 View the changes in the working directory:
 git diff 
 git diff filename
-
+git diff --color-words filename  # nice word by word diffs
 view the changes in the staging area:
 git diff --staged   (--cached in versions earlier than v1.6, also available in newer version)
 
@@ -39,3 +40,16 @@ STEP_2> git commit -m "i will find you and i will kill you"
 Moving and renaming files:
 git mv abc.txt def.txt
 git commit -m "good luck"  # NOTE: if you delete/move the file directly using OS, then stage them yourself. 
+
+Undoing working directory changes:
+git checkout -- filename or directoryname  # -- makes sure that you are checking out files and/or directories in THE CURRENT BRANCH. It's helpful when some filename and directoryname are same as a branch.
+
+Unstaging files:
+git reset HEAD filename  
+
+Amending commits:
+Can only change the latest commit (for obvious reasons - because there are no other commits that refer to this).
+git commit --amend -m "new message"
+
+Retrieving old versions:
+ 
