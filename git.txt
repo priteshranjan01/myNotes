@@ -52,7 +52,4 @@ Can only change the latest commit (for obvious reasons - because there are no ot
 git commit --amend -m "new message"
 
 Retrieving old versions:
-git checkout SHA_of_the_commit -- filename  # -- for current branch
-
-Reverting a commit:
-git revert revert SHA_of_the_commit_that_is_to_be_reverted  # This will automatically commit the change also. use -n (--no-commit) if you want to commit yourself. 
+ 
