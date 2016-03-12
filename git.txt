@@ -58,4 +58,13 @@ Reverting a commit:
 git revert revert SHA_of_the_commit_that_is_to_be_reverted  # This will automatically commit the change also. use -n (--no-commit) if you want to commit yourself. 
 REMEMBER : revert is good only when changes are simple. Use merge for complex changes.
 
-Using Reset to undo commits:
+Using Reset to undo commits: (it's dangerous)
+REMEMBER : Keep a copy of all the commit SHA in a separate file, before you fire a reset command. Because after a reset SHA after that reset commit are not sho
+Reset moves the HEAD pointer back in the commit chain. If you do any changes it shall override the other commits that had been done after that particular commi
+* Soft reset: Just moves the HEAD, but doesn't change the staging index or working directory.
+* mixed (default) reset: changes staging index to match repository. Doesn't change working directory.
+* hard reset: changes staging index and working directory to match directory.
+
+git reset --soft SHA_of_the_commit_to_which_you_want_to_reset
+git reset --mixed SHA_of_the_commit_to_which_you_want_to_reset
+git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
