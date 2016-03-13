@@ -93,3 +93,35 @@ $> git commit -m ""
 
 Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention. 
 If you are a narcissist, then name it after yourself.
+
+Navigating the commit tree
+* parent commit 
+    (HEAD^) or (SHA_of_the_commit^) OR (master^) OR (HEAD~) OR (HEAD~1)
+*grandparent commit
+    (HEAD^^) or (SHA_of_the_commit^^) OR (master^^) OR (HEAD~2)
+* great-grandparent commit
+    (HEAD^^^) or (SHA_of_the_commit^^^) OR (master^^^) or (HEAD~3)
+
+exploring tree listings : 
+$> git ls-tree HEAD  # google for further information 
+
+Getting more info from the commit log: 
+$> git log --oneline
+$> git log --oneline -4
+$> git log -p 
+$> git log -p filename
+$> git log filename
+$> git log --stat --summary
+$> git log --format=oneline
+$> git log -n 4 --format=email
+$> git log -n 4 --format=short
+$> git log -n 4 --format=medium
+$> git log -n 4 --format=full
+$> git log -n 4 --format=fuller
+$> git log --oneline --graph --all --decorate
+
+Viewing commits: 
+$> git show SHA_of_the_commit
+$> git show --oneline HEAD
+$> git show --oneline HEAD~3  #Show the third last commit
+
