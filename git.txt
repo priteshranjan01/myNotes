@@ -68,3 +68,25 @@ Reset moves the HEAD pointer back in the commit chain. If you do any changes it 
 git reset --soft SHA_of_the_commit_to_which_you_want_to_reset
 git reset --mixed SHA_of_the_commit_to_which_you_want_to_reset
 git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
+
+Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed. 
+* git clean -f  # give -n option to see what all files will be deleted.
+
+Ignoring files in our project repository
+.gitignore
+* very basic regular expressions
+    e.g. [aeiou][0-9]
+    *.php
+* negate expressions with !
+    !index.php
+* # starts a comment
+log/*.log 
+log/*.log.[0-9]
+==> It's a good idea to ignore these type of files: Compiled source code, Zipped Files, Logs and DB files, OS generated files, user-uploaded assets
+
+Ignoring files globally
+git config --global core.excludesfile ~/.gitignore_global
+
+Ignoring tracked files: 
+$> git rm --cached filename
+$> git commit -m ""
