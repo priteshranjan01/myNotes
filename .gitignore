@@ -2,3 +2,4 @@
 log/*.log   # Ignorre all '.log' file in 'log' directory
 log/*.log.[0-9]  # Ignore log files which are named on rotating basis
 assests/photoshop
+index.txt

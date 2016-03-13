@@ -90,3 +90,6 @@ git config --global core.excludesfile ~/.gitignore_global
 Ignoring tracked files: 
 $> git rm --cached filename
 $> git commit -m ""
+
+Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention. 
+If you are a narcissist, then name it after yourself.
