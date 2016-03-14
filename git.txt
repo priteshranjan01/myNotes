@@ -131,3 +131,9 @@ $> git diff SHA filename
 $> git log SHA_of_the_first_commit SHA_of_the_second_commit 
 $> git diff --ignore-space_change SHA_of_the_first_commit..HEAD  # or use -b instead of '--ignore-space_change'
 --ignore-all-space or just -w
+
+
+GIT Branching:
+$> git branch  # this will list all the branches currently present
+$> git branch new_branch  # create another branch called 'new_branch'
+$> git checkout new_branch  # switch to new_branch
