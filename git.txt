@@ -3,8 +3,8 @@ GIT Configuration:
     user level: git config --global
     project level: git config
     
-    git config --user.name "pritesh ranjan"
-    git config --user.email "priteshranjantrivedi@gmail.com"
+    git config --global user.name "pritesh ranjan"
+    git config --global user.email "priteshranjantrivedi@gmail.com"
     git config --list
     git config user.email
     git config --global core.editor "vim"
@@ -158,6 +158,16 @@ Merging Code:
 -->> The first step is that we want to make sure that we checkout the branch that things are being merged into, the receiver.
 $> git checkout master
 $> git merge new_branch
+$> git merge --no-ff branch_name  # Don't merge the branches silently, make a commit and let it show in git logs 
+$> git merge --ff-only branch_name  # DO merging only if you can do a fast- forward merge
+
+Resolving conflicts: The thing that gives me a migraine
+These are your options:
+1) Abort the merge: $> git merge --abort
+2) Resolve the conflicts manually (Sorry to say, but this is what I do most of the time), stage the changes and commit
+3) Use a merge tool: Google about this
+
+
 
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
