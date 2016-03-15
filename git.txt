@@ -58,4 +58,117 @@ Reverting a commit:
 git revert revert SHA_of_the_commit_that_is_to_be_reverted  # This will automatically commit the change also. use -n (--no-commit) if you want to commit yourself. 
 REMEMBER : revert is good only when changes are simple. Use merge for complex changes.
 
-Using Reset to undo commits:
+Using Reset to undo commits: (it's dangerous)
+REMEMBER : Keep a copy of all the commit SHA in a separate file, before you fire a reset command. Because after a reset SHA after that reset commit are not sho
+Reset moves the HEAD pointer back in the commit chain. If you do any changes it shall override the other commits that had been done after that particular commi
+* Soft reset: Just moves the HEAD, but doesn't change the staging index or working directory.
+* mixed (default) reset: changes staging index to match repository. Doesn't change working directory.
+* hard reset: changes staging index and working directory to match directory.
+
+git reset --soft SHA_of_the_commit_to_which_you_want_to_reset
+git reset --mixed SHA_of_the_commit_to_which_you_want_to_reset
+git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
+
+Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed. 
+* git clean -f  # give -n option to see what all files will be deleted.
+
+Ignoring files in our project repository
+.gitignore
+* very basic regular expressions
+    e.g. [aeiou][0-9]
+    *.php
+* negate expressions with !
+    !index.php
+* # starts a comment
+log/*.log 
+log/*.log.[0-9]
+==> It's a good idea to ignore these type of files: Compiled source code, Zipped Files, Logs and DB files, OS generated files, user-uploaded assets
+
+Ignoring files globally
+git config --global core.excludesfile ~/.gitignore_global
+
+Ignoring tracked files: 
+$> git rm --cached filename
+$> git commit -m ""
+
+Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention. 
+If you are a narcissist, then name it after yourself.
+
+Navigating the commit tree
+* parent commit 
+    (HEAD^) or (SHA_of_the_commit^) OR (master^) OR (HEAD~) OR (HEAD~1)
+*grandparent commit
+    (HEAD^^) or (SHA_of_the_commit^^) OR (master^^) OR (HEAD~2)
+* great-grandparent commit
+    (HEAD^^^) or (SHA_of_the_commit^^^) OR (master^^^) or (HEAD~3)
+
+exploring tree listings : 
+$> git ls-tree HEAD  # google for further information 
+
+Getting more info from the commit log: 
+$> git log --oneline
+$> git log --oneline -4
+$> git log -p 
+$> git log -p filename
+$> git log filename
+$> git log --stat --summary
+$> git log --format=oneline
+$> git log -n 4 --format=email
+$> git log -n 4 --format=short
+$> git log -n 4 --format=medium
+$> git log -n 4 --format=full
+$> git log -n 4 --format=fuller
+$> git log --oneline --graph --all --decorate
+
+Viewing commits: 
+$> git show SHA_of_the_commit
+$> git show --oneline HEAD
+$> git show --oneline HEAD~3  #Show the third last commit
+
+Comparing commits: 
+$> git diff SHA_of_the_commit_with_which_current_working_directory_state_is_to_compared
+$> git diff SHA filename
+$> git log SHA_of_the_first_commit SHA_of_the_second_commit 
+$> git diff --ignore-space_change SHA_of_the_first_commit..HEAD  # or use -b instead of '--ignore-space_change'
+--ignore-all-space or just -w
+
+
+GIT Branching:
+$> git branch  # this will list all the branches currently present
+$> git branch new_branch  # create another branch called 'new_branch'
+$> git branch -r  # lists all the remote branches
+$> git branch -a  # lists all the branches
+$> git checkout new_branch  # switch to new_branch
+$> git checkout new_branch_name -b  # Create a new branch,  check that out and switch to it 
+
+Comparing branching: 
+$> git diff branch_1..branch_2  # the order of names doesn't matter
+$> git branch --merged  # Tells which branch has all the commits. # Google for more info
+
+Renaming branches: 
+$> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
+
+Deleting branches: 
+$> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail. 
+$> git branch -D name_of_branch  # This is not a request, it's an order. Delete this branch. Non-merged changes will be lost.
+
+Configuring the command prompt to show the branch:  Google about this 
+
+Merging Code:
+-->> The first step is that we want to make sure that we checkout the branch that things are being merged into, the receiver.
+$> git checkout master
+$> git merge new_branch
+
+Remote branches:
+$> git remote  # lists all the remote branches that is known to this repository
+$> git remote add origin https://github.com/priteshranjan01/myNotes.git
+$> git remote -v 
+$> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
+ Creating a remote branch:
+ $> git push -u origin master
+ View the contents of .git/config
+ 
+ Cloning a remote repository:
+ $> git clone https://github.com/priteshranjan01/myNotes.git name_of_the_directory_in_which_to_store_files
+ 
+ 
