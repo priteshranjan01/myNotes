@@ -152,6 +152,8 @@ Deleting branches:
 $> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail. 
 $> git branch -D name_of_branch  # This is not a request, it's an order. Delete this branch. Non-merged changes will be lost.
 
+Configuring the command prompt to show the branch:  Google about this 
+
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
 $> git remote add origin https://github.com/priteshranjan01/myNotes.git
