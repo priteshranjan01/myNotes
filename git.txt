@@ -154,6 +154,11 @@ $> git branch -D name_of_branch  # This is not a request, it's an order. Delete 
 
 Configuring the command prompt to show the branch:  Google about this 
 
+Merging Code:
+-->> The first step is that we want to make sure that we checkout the branch that things are being merged into, the receiver.
+$> git checkout master
+$> git merge new_branch
+
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
 $> git remote add origin https://github.com/priteshranjan01/myNotes.git
