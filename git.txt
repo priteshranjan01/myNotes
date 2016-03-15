@@ -167,7 +167,15 @@ These are your options:
 2) Resolve the conflicts manually (Sorry to say, but this is what I do most of the time), stage the changes and commit
 3) Use a merge tool: Google about this
 
-
+Stashing Changes: 
+$> git stash save   "a message to remind you of the changes"
+$> git stash list  # lists all the stash list
+$> git stash show stash@{0}  # show the stash number 0 
+$> git stash show -p stash@{1}  # Show the stash number 1 in diff (patch) style
+$> git stash apply stash@{0}  # Merges the changes the stash in the current branch. NOTE: You can move the stash of one branch to another. CAUTION: This can lead to conflicts and hence headaches.
+$> git stash pop stash@{0}  # merges the changes and makes the changes into the working directory also
+$> git stash drop stash@{0}  # Discard the data in the stash # 0
+$> git stash clear  # Drops all of the stashes
 
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
