@@ -139,7 +139,18 @@ $> git branch new_branch  # create another branch called 'new_branch'
 $> git branch -r  # lists all the remote branches
 $> git branch -a  # lists all the branches
 $> git checkout new_branch  # switch to new_branch
+$> git checkout new_branch_name -b  # Create a new branch,  check that out and switch to it 
 
+Comparing branching: 
+$> git diff branch_1..branch_2  # the order of names doesn't matter
+$> git branch --merged  # Tells which branch has all the commits. # Google for more info
+
+Renaming branches: 
+$> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
+
+Deleting branches: 
+$> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail. 
+$> git branch -D name_of_branch  # This is not a request, it's an order. Delete this branch. Non-merged changes will be lost.
 
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
