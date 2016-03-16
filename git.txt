@@ -188,5 +188,8 @@ $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  
  Cloning a remote repository:
  $> git clone https://github.com/priteshranjan01/myNotes.git name_of_the_directory_in_which_to_store_files
+ NOTE: if you want to checkout a particular branch, give '-b' option with 'git clone'
+ Tracking remote branches: Google it, I am in a hurry.
  
- 
+ Pushing changes to the remote repository:
+ $> git push  # pushes to the default branches that is being tracked
