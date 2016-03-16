@@ -193,3 +193,10 @@ $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  
  Pushing changes to the remote repository:
  $> git push  # pushes to the default branches that is being tracked
+ 
+ Fetching changes from a remote repository:
+ $> git fetch origin 
+ GOLDEN TIPS : 
+ -- Start your day with a git fetch
+ -- fetch before you push
+ -- fetch often
