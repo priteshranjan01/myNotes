@@ -1,0 +1,34 @@
+Search and replace : http://vim.wikia.com/wiki/Search_and_replace
+
+Basic search and replace:
+	:%s/foo/bar/g		Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
+	:s/foo/bar/g		Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
+	:%s/foo/bar/gc		Change each 'foo' to 'bar', but ask for confirmation first.
+	:%s/\<foo\>/bar/gc	Change only whole words exactly matching 'foo' to 'bar'; ask for confirmation.
+	:%s/foo/bar/gci		Change each 'foo' (case insensitive due to the i flag) to 'bar'; ask for confirmation.
+	:%s/foo/bar/gcI		Change each 'foo' (case sensitive due to the I flag) to 'bar'; ask for confirmation.
+	:5,12s/foo/bar/g	Change each 'foo' to 'bar' for all lines from line 5 to line 12 (inclusive).
+
+To comment out blocks in vim:
+	press Esc (to leave editing or other mode)
+	hit ctrl+v (visual block mode)
+	use the up/down arrow keys to select lines you want (it won't highlight everything - it's OK!)
+	Shift+i (capital I)
+	insert the text you want, i.e. '% '
+	press Esc
+	Give it a second to work.
+
+	To uncomment blocks in vim:
+	press Esc (to leave editing or other mode)
+	hit ctrl+v (visual block mode)
+	use the up/down arrow keys to select the lines to uncomment.
+	If you want to select multiple characters, use one or combine these methods:
+
+	use the left/right arrow keys to select more text
+	to select chunks of text use shift + left/right arrow key
+	you can repeatedly push the delete keys below, like a regular delete button
+	press d or x to delete characters, repeatedly if necessary
+
+	press Esc
+
+	Give it a second to work.
