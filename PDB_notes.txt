@@ -1,0 +1,43 @@
+Starting the Debugger
+	From the Command Line		python -m pdb pdb_script.py
+	Within the Interpreter		import pdb; pdb.run(pdb_script.py)
+	From Within Your Program 	pdb.set_trace()
+	After a Failure			pm() or post_mortem()
+
+Controlling the Debugger
+	Navigating the Execution Stack 	<> <where> 
+		list 10, 45 	print lines from line number 10 to 45
+		where 		find out exactly what line is being executed and where on the call stack you are
+		up 		moves towards older frames on the stack
+		down		moves towards newer frames
+	
+	Examining Variables on the Stack
+		args	prints all of the arguments to the function active in the current frame
+		pp	pretty print
+	
+	Stepping Through Your Program
+		step 	
+		next 	step over any function call
+		untill	until can be used to step past the end of a loop
+		return 	continues executing until the function is about to execute a return statement, and then it pauses
+		jump lineno
+
+Breakpoints
+	break 		list all the breakpoints currently set
+	break lineno	To set a breakpoint on a specific line of the current file, use break lineno
+	continue	keep running your program until the next breakpoint		
+	To specify a breakpoint in another file, prefix the line or function argument with a filename.	
+	disable breakpoint_number
+	enable 	breakpoint_number
+	clear 	breakpoint_number
+	tbreak linenumber  set a temporary breakpoint at linenumber
+
+Conditional Breakpoints	
+	break 	breakpoint_number, condition
+
+Ignoring Breakpoints
+	ignore	breakpoint_number, this_many_times
+
+Triggering Actions on a Breakpoint
+	commands breakpoint_number
+	
