@@ -195,8 +195,19 @@ $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  $> git push  # pushes to the default branches that is being tracked
  
  Fetching changes from a remote repository:
- $> git fetch origin 
+ $> git fetch origin  # Fetch doesn't do any harm, so do as many times as you wish
  GOLDEN TIPS : 
  -- Start your day with a git fetch
  -- fetch before you push
  -- fetch often
+ NOTE: origin/master is just like any other branch except that we can not check that branch out
+ $> git pull  # It does git fetch and then git merge in one step. Well, i would still like to fetch and then merge myself. But anyway thanks, git pull
+ 
+ Pushing to an updated remote branch: well fetch, merge in local repo and push
+ Deleting a remote branch: 
+ $> git push origin :branch_to_be_deleted
+ or 
+ $> git push origin --delete non_tracking
+ 
+ Setting up aliases: 
+ $> git config --global alias.logp "log --oneline --decorate --graph"
