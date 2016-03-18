@@ -1,0 +1,136 @@
+What is Docker?
+	A platform for developing, shipping and running applications using container virtualization technology
+
+The docker platform consists of multiple products/tools
+-Docker Engine: The Docker daemon that runs the commands from docker client. 
+-Docker Hub: Public Registry for storing and sharing your Docker Images
+-Docker Machine: Tool that automatically provisions Docker hosts and installs the docker engine on them.
+-Docker swarm: Tool that clusters Docker hosts and schedules containers
+-Docker compose: Tool to create and manage multi-container applications.
+-Kitematic
+
+The reasons for Virtualization technology and benifits of VM
+
+Massive improvement but yet Limitations of VMs:
+-Each VM still requires its own CPU, RAM, Storage, and an entire OS
+-The more vms you run, the more resources you need
+-Application portability not guaranteed
+
+Introduced Containers:
+Container based virtualization uses the kernel of host's OS to run multiple guest instances.
+Each instance is called a container.
+Each container has its own -Root File system, -Processes, -Memory, -Devices, -Network stack.
+
+Docker and the linux kernel:
+- Docker Engine ( docker daemon)
+- uses linux namespace (ipc, mnt, pid, net, uts) gives an isolated workspace.
+
+Docker images and containers:
+Images : read only template used to create containers. Similar to templates in vSphere that are used to create a VM.
+		Can be stored (in local registry, or DockerHub)and distributed.
+* specified by repository:tag
+	
+Containers:
+	-isolated application platform
+	-contains everything needed to run your application
+	-based on one or more images
+
+Registry and Repository: 
+ Registry contain Repository which contain Images
+ DockerHub is a public registry.
+
+Docker Orchestration:
+* Docker machine: 
+* Docker Machine: tools that provisions docker hosts and installs the docker engine on them 
+* Docker Swarm: 
+* Docker compose: 
+
+	
+Benifits of Docker:
+* separation of concerns.
+Commands: 
+docker version
+docker images
+docker run [options] [image] [command] [args]
+eg: docker run ubuntu:14.04 echo "hello world"
+	docker run ubuntu ps ax 
+	docker run -t -i ubuntu:14.04 /bin/bash  # i -> connect to standard input on container and t -> to get a sudo terminal
+	hit Ctrl + P + Q to exit container terminal without exiting container
+	docker ps
+	docker run -d ubuntu:14.04 /bin/bash  # d to run it in detached mode
+	docker logs containerID or container_name
+	docker run -d -P tomact:7  # P (in caps) is for automatic port mapping
+Container ID: 
+
+Creating Images:
+Each layer consist of layers. Docker adds a read/write enabled filesystem layer on top.
+1) Docker commit [options] [containerID] [repository:tag]
+2) Using Dockerfile: contains instructions for building a docker image
+	Dockerfile instructions: 
+		a) FROM ubuntu:14.04
+		b) RUN apt-get install vim  # RUN instruction executes on top writable layer and perform a commit of the image
+		c) RUN apt-get install curl
+			TIP: Aggregate multiple RUN instructions into one using "&&"
+			eg. RUN apt-get update && apt-get install -y curl vim  # -y is because we don't want the process to wait for user input. i.e Don't ask me 'Do you want to install vim'
+		d) CMD : defines a default command to execute when a container is created, can be specified only once in a Dockerfile, can be overridden at run time
+			eg. CMD ping -c 30 localhost 	# Schell format
+			eg. CMD ["ping", "localhost", "-c", "30"]  # Exec format
+		e) ENTRYPOINT # Cannot override arguments at runtime # Run time arguments and CMD instruction are passed as parameters to the ENTRYPOINT instruction
+			eg. ENTRYPOINT ["ping"]
+		f) VOLUME : creates a mount point, which is initialized when the container is executed
+			eg. VOLUME /myvol
+			eg. VOLUME /www/website1.com /www/website2.com
+			eg. VOLUME ['myvol', 'myvol2']
+		g) EXPOSE: configures which ports a container will listen on at runtime
+				NOTE: Ports still need to be mapped when container is executed
+			eg. EXPOSE 80 443
+		
+DOCKER BUILD:
+$> docker build [options] [path]  # path is the build context i.e. the path where Dockerfile
+
+Managing Images and Containers:
+List all containers: $> docker ps -a 
+Start a container using the container ID: $> docker start <container ID>
+Stop a container using the container ID: $> docker stop <container ID>
+docker exec -t -i [container ID] /bin/bash  # to conatin another process within the container
+docker rm containerID
+docker rmi [image ID]  # delete images locally
+docker rmi [repo:tag]
+
+Tagging images: to rename images
+docker tag [image ID] [repo:tag]
+docker tag [local repo:tag] [Docker Hub repo:tag]
+
+
+Docker HUB:
+docker push []local repo:tag] [docker-hub repo:tag]
+docker pull repo:image
+
+Volumes: Is a designated directory in a container, which is designed to persist data, independent od the container's life cycle
+- Volume changes are excluded when updating an image
+- Persist when a container is deleted
+- Can be mapped to a host folder
+- Can be shared between containers
+USES: decouple the data that is stores from the container which created the data
+		Sharing data between containers
+Mounting a volume: volumes are mounted when creating or executing a container
+$> docker run -d -P -v /myvolume ubuntu:14.04
+$> docker run -i -t -v /data/src:/test/src ubuntu:14.04
+
+Container PORT mapping: docker run -p -d 8080:80 ubuntu:12.04
+	-P (in caps) for automatic mapping 
+	
+LINKING CONTAINERS: Linking is a communication method between containers which allows them to secutely transfer data from one to another.
+(reciepient source)
+
+Creating a link:
+create the source container first
+create the reciepient container and use the --link options
+
+$> docker run -d --name database postgres
+$> docker run -d -P --name website --link database:db nginx
+
+Docker Operations:
+
+
+
