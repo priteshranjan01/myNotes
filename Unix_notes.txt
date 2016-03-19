@@ -1,0 +1,21 @@
+Ctrl a : move the cursor to the begining of the line
+Ctrl e : move the cursor to the end of the line
+apropos - search the manual page names and descriptions. E.G. $> apropos chmo
+ls -lah
+mv and cp options: 
+    -n : no overrite
+    -f : force replace ( Default)
+    -i : interactive, ask (if there is a conflict) before replacing a file
+    -v : verbose
+
+Hard Links: $> ln file_to_link hardlink 
+Symbolic links: $> ln -s file_to_link symlink
+
+$> find ./ -name delete.txt -and -not -path *ab*
+$> find ./ -name delete.txt
+
+$> chown username:groupname filename  # -R for recursive
+
+$> whereis echo
+$> which echo
+$> whatis echo
