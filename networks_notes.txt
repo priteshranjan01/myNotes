@@ -1,0 +1,19 @@
+Computer Netowking ( Udacity Georgia Tech Online CN course, notes)
+
+TO Read : The Design Philosophy of the DARPA Internet Protocols http://ccr.sigcomm.org/archive/1995/jan95/ccr-9501-clark.pdf
+
+Goal Interconnectivity: IP is the narrow waist. all protocols above and below it must conform to it, so that different devices operating on different protocols can communicate among themselves.
+
+Goal Survivability: "network works even if devices fail"
+    Achieved by : 1) replication
+                  2) Fate Sharing - https://en.wikipedia.org/wiki/Fate-sharing 
+                  If a device fails all the state with it should be lost. (NAT violates it)
+
+Goal Heterogeneity: TCP and UDP protocols 2) "Best effort" delivery
+Goal Distributed Management: eg DNS and BGP. You take care of nodes below yourselves.
+Other goals: COST, Ease of Attachment, Accountability.
+
+End to End Argument: the network should be dumb and end application should be intelligent. 
+e.g. Error handling in file transfer, end-to-end encryption, 
+NAT violates end-to-end principle.  
+
