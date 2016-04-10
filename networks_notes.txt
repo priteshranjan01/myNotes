@@ -32,3 +32,14 @@ ROUTERS:
 Buffer Sizing: How much buffering do switches and routers need? (2T * C), T is the round trip time between src and dest, and c is the bits/sec capacity of the bottleneck link.
 Problem: 2T * C can be too much, increasing the cost; and more queing delay hence delayed feedback about congestion
 Read more about this: Buffer sizing for a TCP sender.
+
+ROUTING: the process by which nodes discover where to forward packets
+    Routing inside an Autonomous system -> Intradomain routing; among different Autonomous systems (ASes)-> Interdomain routing
+    An Autonomous system consists of Nodes, edges. Nodes are also called PoPs (Points of Presence)
+    Intradomain routing is of two types: Distance Vector, Link State
+    Distance Vector routing: 
+        Each node sends its routing table to its neighbours.
+        Routers compute cost to each destination based on shortest available path.
+        Based on Bellman-Ford algorithm.
+       Problem: Count to infinity problem. ( If you can't explain it to yourself then google it)
+       Solution: Poision Reverse.
