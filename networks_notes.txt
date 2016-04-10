@@ -1,4 +1,4 @@
-Computer Netowking ( Udacity Georgia Tech Online CN course, notes)
+Computer Networking ( Udacity Georgia Tech Online CN course, notes)
 
 TO Read : The Design Philosophy of the DARPA Internet Protocols http://ccr.sigcomm.org/archive/1995/jan95/ccr-9501-clark.pdf
 
@@ -17,3 +17,18 @@ End to End Argument: the network should be dumb and end application should be in
 e.g. Error handling in file transfer, end-to-end encryption, 
 NAT violates end-to-end principle.  
 
+SWITCHING: 
+ARP: broadcast the IP, the machine with that particular IP will unicast with the MAC.
+HUB: Problems: Too much collision and hence greater latency, Too much flooding packets, One misconfigured ruins the whole party.
+SWITCH: Auto-configuring, layer 2(ethernet), Forwarding is fast.
+    If there are cyles in toplogy, then it can lead to "loops" and "broadcast storms"
+    Solution: Spanning Tree: Create a tree which contains all the switches. Instead of flooding, the switch will forward the packets along the spanning tree.
+    Constructing a spanning tree: 
+        1) Elect a root. ( The switch with smallest is elected by the fellow switches)
+        2) At each switch, Exlude the link which is not a part of the shortest path to the root.
+    Message Format: ('The node being claimed as root', 'distance of the particular node sending this message from the claimed root', 'the node sending this message')
+ROUTERS: 
+
+Buffer Sizing: How much buffering do switches and routers need? (2T * C), T is the round trip time between src and dest, and c is the bits/sec capacity of the bottleneck link.
+Problem: 2T * C can be too much, increasing the cost; and more queing delay hence delayed feedback about congestion
+Read more about this: Buffer sizing for a TCP sender.
