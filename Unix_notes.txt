@@ -19,3 +19,132 @@ $> chown username:groupname filename  # -R for recursive
 $> whereis echo
 $> which echo
 $> whatis echo
+$> uptime
+$> users
+$> uname
+$> uname -mnrsvp
+$> hostname
+$> domainname
+
+Disk information commands: 
+DISK FREE: $> df -h  # -h for base 2, -H for base 10 in space calculations
+DISK Usage: $> du ~/path -ahd 1  # d for depth, a for all (not only directories but files also), 
+
+Processes: 
+$> ps -ax  # a for all users, x for background processes
+$> ps u  # NOTE: there is no dash before u
+$> ps -ef  #
+To see every process on the system using standard syntax:
+  ps -e
+  ps -ef
+  ps -eF
+  ps -ely
+
+To see every process on the system using BSD syntax:
+  ps ax
+  ps axu
+
+To print a process tree:
+  ps -ejH
+  ps axjf
+
+To get info about threads:
+  ps -eLf
+
+Monitoring processes: 
+
+$> top -n 10 -o CPU -s 3 -U pritesh  # Top 10 processes sort by CPU field, and refresh every 3 seconds
+TIP: top command is interactive, hit ? while top is displaying information and follow the instructions
+
+Word Count, sort, unique
+$> wc file_name  # returns no_of_lines no_of_words no_of_characters
+$> sort file_name  # -f for case insensitive  # -r for reverse sort  # -u remove duplicates
+$> uniq file_name  # By default it removes consecutive line that are same
+$> uniq -d file_name  # Tell only the consecutive line that are same
+$> uniq -u file_name  # Complementary to the previous command
+
+$> cal  # Displays current month's calender
+$> cal 09 1992 # Displays the calender for sep 1992
+$> cal -y 1992  # Displays the calender for 1992
+
+$> bc # An arbitrary precision calculator language
+scale=10  #Increases the precision to 2 decimal places, Useful for floating arithmetic
+quit
+$> expr 1 + 1  # Remember the spaces accompanying 1 are crucial
+$> expr 1 \* 99  # #escape * not to mistake for wildcard character
+
+$> units  # Check out on google
+
+History shortcuts: 
+$> !3 # References history command no 3
+$> !-2  # References command which was 2 commands back
+$> !vim  # References the most recent command begining with "vim"
+$> !!  # References previous command
+$> !$  # References previous command's arguments
+
+Alias # Write in .bashrc or .bash_profile for persisting
+$> alias ll='ls -la'
+$> alias hello='echo "Hello World!"'
+$> alias
+$> unalias hello
+
+Command prompt formatting codes: Although I am too lazy to change the bash prompt ever, still here is a list.
+\u      username
+\s      current shell
+\w      current working directory
+\W      basename of current working directory
+\d      date in "weekday month date" format ("Mon jan 16)
+\D{format}  date in strftime format ($Y-%m-%d")
+\A      time in 24 hour HH:MM format
+\t      time in 24 hour HH:MM:SS format
+\@      time in 12 hour HH:MM am/pm format
+\T      time in 12-hour HH:MM am/pm format
+\H      hostname
+\h      hostname upto first "."
+\!      history number of this command
+\$      when UID is 0(root), a '#', otherwise a "$"
+
+
+GREP : Hooyah !! Global Regular Expression Print. 
+NOTE ==> google for Reg Ex character classes, eg [:alpha:] for ALphabetic characters, Looks like it is specific to grep.
+$> echo 'georGGe lYnda Mary' | grep [[:lower:]]
+
+WARNING: Do remember the difference between BASIC and EXTENDED regex set. Google if if you don't remember. + | and a lot others are in extended set, and you have to use -E option to tell grep to consider the extended set
+e.g. $> grep -E 'ap+le' fruitnames.txt  
+e.g. $> grep -E 'apple|litchi' fruitnames.txt
+
+$> grep apple fruitnames.txt
+$> grep -i apple fruitnames.txt  # case insensitive
+$> grep -w apple fruitnames.txt  # whole words match
+$> grep -v -n apple fruitnames.txt  # All lines that don't match the search, -n for line-number
+$> grep -c apple fruitnames.txt  # returns the number of matches
+
+GREP from multiple files/ directory
+$> grep -R apple directoryName
+$> grep apple *fruit.txt  # will look in all files that end in 'fruit.txt'
+$> grep --color apple fruitnames.txt
+
+Translating with 'tr'
+$> echo 'a,b,c' | tr ',' '-'   # Google for more
+
+SED: Stream editor  # Google it
+
+cut: characters (-c), bytes(-b), fields(-f)  :  remove sections from each line of files
+$> cut -c 2-10 dir_content.txt
+$> cut -c 2-10,29-34 dir_output.txt  # Notice there is no space after ,
+$> cut -c 2-10,29-34,48- dir_output.txt
+
+diff: 
+-i  case insensitive
+-b  ignore changes to blank characters
+-w  ignore all whitespace
+-B  Ignore blank lines
+-r  recursively compare directories
+-s  show identical files
+Output formats
+-c copied context
+-u unified context
+-y side-by-side
+-q only whether files differ
+
+xargs: build and execute command lines from standard input
