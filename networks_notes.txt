@@ -40,6 +40,38 @@ ROUTING: the process by which nodes discover where to forward packets
     Distance Vector routing: 
         Each node sends its routing table to its neighbours.
         Routers compute cost to each destination based on shortest available path.
-        Based on Bellman-Ford algorithm.
+        DIstributed version of Bellman-Ford algorithm.
        Problem: Count to infinity problem. ( If you can't explain it to yourself then google it)
        Solution: Poision Reverse.
+    RIP : Routing Information Protocol
+        * Unit cost edges
+        * Infinity value is 16 (Hence max nodes can be 16)
+        * Table refreshes every 30 seconds or when updates occur
+        * Updates sent to all neighbours except the one that sent the update. (Split Horizon)
+        * Max refresh interval is 180 seconds
+        ** Problem: Slow convergence.
+        ** Count to infinity problem. 
+        ** There can only be 16 nodes.
+    Link State Routing: e.g. OSPF, Intermediate System-Intermediate System (IS-IS)
+        * Uses Dijkstra's Shortest path algorithm
+        Google for more explanation.
+    BGP: 
+        * Route Selection Process: to select a 'best route' from multiple routes to the same destination.
+            1) Prefer higher "local preference"
+            2) Shortest AS path length
+            3) Multi-exit discrimator (MED) 
+            4) Shortest IGP path. ("hot potato" routing) 
+            5) Tiebreak. use the most stable route or the router with the smallest router ID
+    e-BGP: The protocol through which ASes send "route advertisements" across other ASes
+        * BGP route attributes (Destination IP, Next Hop, ASes in between)
+    i-BGP: The protocol that is used to advertise routes inside an AS for external destinations 
+    
+    IGP : routes inside an AS for internal destinations
+    iBGP: routes inside an AS for external destinations 
+    
+    Interdomain routing business model. (Interesting, google for more)
+        * Route Ranking :=> Customer > Peer routes > Provider routes.
+        * Route Filtering/Export :=> From customer - to everyone
+                                     From Peers - to customers only
+                                     From provider - to customers only
+        Read about "persistent route oscillations in interdomain routing"
