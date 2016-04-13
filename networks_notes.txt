@@ -75,3 +75,12 @@ ROUTING: the process by which nodes discover where to forward packets
                                      From Peers - to customers only
                                      From provider - to customers only
         Read about "persistent route oscillations in interdomain routing"
+        
+Naming, Addressing and Forwarding:
+    Classfull Addressing, Class A, B, C
+    CIDR: Benifits -> Efficiency, Finer Granualirity, etc. etc.
+    Multihoming: 
+    CIDR uses 'longest prefix match (LPM)' for routing.
+    LPM can be done by 'single bit trie', but that would take a lot of memory lookups. 
+    or use CAM and TCAM as alternative solutions in hardware. CAM allows only exact matches in O(1).
+    
