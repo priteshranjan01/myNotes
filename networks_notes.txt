@@ -84,3 +84,17 @@ Naming, Addressing and Forwarding:
     LPM can be done by 'single bit trie', but that would take a lot of memory lookups. 
     or use CAM and TCAM as alternative solutions in hardware. CAM allows only exact matches in O(1).
     
+Routing: 
+    * A copy of routing table is stored at every "line card" of the router.
+    * Crossbar switching: 
+        - Every input port has connection to every output port. 
+        - During each time slot, each input is connected to zero or one outputs.
+        Advantage: Parallelism
+        Disadvantage: Need a scheduling algorithm
+    * Max-min Fairness for achiving fairness in the scheduling algorithm.
+    * How to achieve Max-min fairness; 
+        - Round Robin - Problem: small guys stuck behind bulky ones.
+        - Bit-by-bit scheduling - Problem : feasibility
+        - Fair Queueing - Service te packets according to their finish time.
+        
+DNS 
