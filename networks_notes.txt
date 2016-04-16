@@ -97,4 +97,14 @@ Routing:
         - Bit-by-bit scheduling - Problem : feasibility
         - Fair Queueing - Service te packets according to their finish time.
         
-DNS 
+DNS : 
+    * Record Types: 
+        - A : Name -> IP Address
+        - NS : Name -> Authoritative nameserver, "referrals"
+        - MX : Name -> Mail Server 
+        - CNAME: Canonical name, an alias to other domain name
+        - PTR : IP -> domain name
+        - AAAA: Name -> IPv6 address
+    * Explore the 'dig' command
+    
+Congestion Control:
