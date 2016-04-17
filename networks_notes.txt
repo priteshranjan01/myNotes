@@ -108,3 +108,20 @@ DNS :
     * Explore the 'dig' command
     
 Congestion Control:
+    Congestion Collapse is caused by 
+        - Spurious retransmissions of packets in flight. (Sender doesn't get ACK in time and hence retransmits while the packet is still on its way.)
+        - Undelivered packets.
+    Goals of congestion control: - Efficient and Fair usage of resources. - Avoid congestion collapse.
+    Two approches:  (1) End-to-end (2) Network assisted - routers provide feedback about the rates the end-systems should be sending at.
+    1) End-to-end : TCP congestion control: Additive-inc-Multiplicative-decrease
+    2) Rate based: 
+    TCP Incast: http://bradhedlund.com/2011/05/01/tcp-incast-and-cloud-application-performance/
+        - solutions: Using finer granularity timers and fewer ACK
+    Barrier synchronization and idle time: "A synchronization barrier enables multiple threads to wait until all threads have all reached a particular point of execution before any    thread continues.Synchronization barriers are useful for phased computations, in which threads executing the same code in parallel must all complete one phase before moving on to the next."
+    
+    TCP not fit for streaming: 1) Protocol overhead 2) retransmission may not be useful for lost packets 3) Slowing down after packet loss
+    UDP : Features: 1) No retransmissions 2) No ACK 3) Less overhead 4) No sending rate adaption
+    YouTube streaming: Uses HTTP/TCP rather than UDP. Google about this for more.
+    Skype : Peer-to-peer technology. Google for more.
+    
+Rate limiting and traffic control:
