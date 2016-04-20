@@ -125,3 +125,20 @@ Congestion Control:
     Skype : Peer-to-peer technology. Google for more.
     
 Rate limiting and traffic control:
+For : traffic control and ensuring that flows do not exceed rate. E.g. Audio 
+    constant bit rate (CBR) source and Variable bit rate (VBR) source. E.g. Video and Data transfer.
+    Leaky bucket traffic shaper: 
+    (r, T) traffic shaping
+    Tocken Bucket
+    Power Boost : by Comcast. Allows sender to send at a higher rate for some period of time.
+        - capped and uncapped power boost
+    Buffer bloat: 
+    
+    Network measurement: Active and passive management
+        - Active: eg. Ping, tracert: Inject additional traffic into the network to measure various characteristics.
+        - passive: Collect packets, flow stats etc of traffic already on the network. eg. Logs, packet traces, flow stats. SNMP
+        SNMP : Management Information Base (MIB) is polled and queried for particular inforamtion.
+        Packet monitoring: tcpdump, wireshark, ethereal
+        Flow monitoring: 
+
+Traffic engineering:
