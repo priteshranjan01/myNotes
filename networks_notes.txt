@@ -1,0 +1,140 @@
+Computer Networking ( Udacity Georgia Tech Online CN course, notes)
+
+TO Read : The Design Philosophy of the DARPA Internet Protocols http://ccr.sigcomm.org/archive/1995/jan95/ccr-9501-clark.pdf
+
+Goal Interconnectivity: IP is the narrow waist. all protocols above and below it must conform to it, so that different devices operating on different protocols can communicate among themselves.
+
+Goal Survivability: "network works even if devices fail"
+    Achieved by : 1) replication
+                  2) Fate Sharing - https://en.wikipedia.org/wiki/Fate-sharing 
+                  If a device fails all the state with it should be lost. (NAT violates it)
+
+Goal Heterogeneity: TCP and UDP protocols 2) "Best effort" delivery
+Goal Distributed Management: eg DNS and BGP. You take care of nodes below yourselves.
+Other goals: COST, Ease of Attachment, Accountability.
+
+End to End Argument: the network should be dumb and end application should be intelligent. 
+e.g. Error handling in file transfer, end-to-end encryption, 
+NAT violates end-to-end principle.  
+
+SWITCHING: 
+ARP: broadcast the IP, the machine with that particular IP will unicast with the MAC.
+HUB: Problems: Too much collision and hence greater latency, Too much flooding packets, One misconfigured ruins the whole party.
+SWITCH: Auto-configuring, layer 2(ethernet), Forwarding is fast.
+    If there are cyles in toplogy, then it can lead to "loops" and "broadcast storms"
+    Solution: Spanning Tree: Create a tree which contains all the switches. Instead of flooding, the switch will forward the packets along the spanning tree.
+    Constructing a spanning tree: 
+        1) Elect a root. ( The switch with smallest is elected by the fellow switches)
+        2) At each switch, Exlude the link which is not a part of the shortest path to the root.
+    Message Format: ('The node being claimed as root', 'distance of the particular node sending this message from the claimed root', 'the node sending this message')
+ROUTERS: 
+
+Buffer Sizing: How much buffering do switches and routers need? (2T * C), T is the round trip time between src and dest, and c is the bits/sec capacity of the bottleneck link.
+Problem: 2T * C can be too much, increasing the cost; and more queing delay hence delayed feedback about congestion
+Read more about this: Buffer sizing for a TCP sender.
+
+ROUTING: the process by which nodes discover where to forward packets
+    Routing inside an Autonomous system -> Intradomain routing; among different Autonomous systems (ASes)-> Interdomain routing
+    An Autonomous system consists of Nodes, edges. Nodes are also called PoPs (Points of Presence)
+    Intradomain routing is of two types: Distance Vector, Link State
+    Distance Vector routing: 
+        Each node sends its routing table to its neighbours.
+        Routers compute cost to each destination based on shortest available path.
+        DIstributed version of Bellman-Ford algorithm.
+       Problem: Count to infinity problem. ( If you can't explain it to yourself then google it)
+       Solution: Poision Reverse.
+    RIP : Routing Information Protocol
+        * Unit cost edges
+        * Infinity value is 16 (Hence max nodes can be 16)
+        * Table refreshes every 30 seconds or when updates occur
+        * Updates sent to all neighbours except the one that sent the update. (Split Horizon)
+        * Max refresh interval is 180 seconds
+        ** Problem: Slow convergence.
+        ** Count to infinity problem. 
+        ** There can only be 16 nodes.
+    Link State Routing: e.g. OSPF, Intermediate System-Intermediate System (IS-IS)
+        * Uses Dijkstra's Shortest path algorithm
+        Google for more explanation.
+    BGP: 
+        * Route Selection Process: to select a 'best route' from multiple routes to the same destination.
+            1) Prefer higher "local preference"
+            2) Shortest AS path length
+            3) Multi-exit discrimator (MED) 
+            4) Shortest IGP path. ("hot potato" routing) 
+            5) Tiebreak. use the most stable route or the router with the smallest router ID
+    e-BGP: The protocol through which ASes send "route advertisements" across other ASes
+        * BGP route attributes (Destination IP, Next Hop, ASes in between)
+    i-BGP: The protocol that is used to advertise routes inside an AS for external destinations 
+    
+    IGP : routes inside an AS for internal destinations
+    iBGP: routes inside an AS for external destinations 
+    
+    Interdomain routing business model. (Interesting, google for more)
+        * Route Ranking :=> Customer > Peer routes > Provider routes.
+        * Route Filtering/Export :=> From customer - to everyone
+                                     From Peers - to customers only
+                                     From provider - to customers only
+        Read about "persistent route oscillations in interdomain routing"
+        
+Naming, Addressing and Forwarding:
+    Classfull Addressing, Class A, B, C
+    CIDR: Benifits -> Efficiency, Finer Granualirity, etc. etc.
+    Multihoming: 
+    CIDR uses 'longest prefix match (LPM)' for routing.
+    LPM can be done by 'single bit trie', but that would take a lot of memory lookups. 
+    or use CAM and TCAM as alternative solutions in hardware. CAM allows only exact matches in O(1).
+    
+Routing: 
+    * A copy of routing table is stored at every "line card" of the router.
+    * Crossbar switching: 
+        - Every input port has connection to every output port. 
+        - During each time slot, each input is connected to zero or one outputs.
+        Advantage: Parallelism
+        Disadvantage: Need a scheduling algorithm
+    * Max-min Fairness for achiving fairness in the scheduling algorithm.
+    * How to achieve Max-min fairness; 
+        - Round Robin - Problem: small guys stuck behind bulky ones.
+        - Bit-by-bit scheduling - Problem : feasibility
+        - Fair Queueing - Service te packets according to their finish time.
+        
+DNS : 
+    * Record Types: 
+        - A : Name -> IP Address
+        - NS : Name -> Authoritative nameserver, "referrals"
+        - MX : Name -> Mail Server 
+        - CNAME: Canonical name, an alias to other domain name
+        - PTR : IP -> domain name
+        - AAAA: Name -> IPv6 address
+    * Explore the 'dig' command
+    
+Congestion Control:
+    Congestion Collapse is caused by 
+        - Spurious retransmissions of packets in flight. (Sender doesn't get ACK in time and hence retransmits while the packet is still on its way.)
+        - Undelivered packets.
+    Goals of congestion control: - Efficient and Fair usage of resources. - Avoid congestion collapse.
+    Two approches:  (1) End-to-end (2) Network assisted - routers provide feedback about the rates the end-systems should be sending at.
+    1) End-to-end : TCP congestion control: Additive-inc-Multiplicative-decrease
+    2) Rate based: 
+    TCP Incast: http://bradhedlund.com/2011/05/01/tcp-incast-and-cloud-application-performance/
+        - solutions: Using finer granularity timers and fewer ACK
+    Barrier synchronization and idle time: "A synchronization barrier enables multiple threads to wait until all threads have all reached a particular point of execution before any    thread continues.Synchronization barriers are useful for phased computations, in which threads executing the same code in parallel must all complete one phase before moving on to the next."
+    
+    TCP not fit for streaming: 1) Protocol overhead 2) retransmission may not be useful for lost packets 3) Slowing down after packet loss
+    UDP : Features: 1) No retransmissions 2) No ACK 3) Less overhead 4) No sending rate adaption
+    YouTube streaming: Uses HTTP/TCP rather than UDP. Google about this for more.
+    Skype : Peer-to-peer technology. Google for more.
+    
+Rate limiting and traffic control:
+
+
+
+Network Security: 
+
+Internet worms: Spreads automatically - Code that propogates and replicates over a network. 
+Internet virus: Spreads by manual action. "infection" of an existing program that results in the modifacation of behaviour
+Types of virus: 
+	- parasitic: infects executable files.
+	- memory resident: infects running programs.
+	- Boot-sector: spreads when the system boots.
+	- Polymotphic: encrypt part of virus programs using randomly generated keys.
+	
