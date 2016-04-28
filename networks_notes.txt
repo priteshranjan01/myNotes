@@ -125,3 +125,16 @@ Congestion Control:
     Skype : Peer-to-peer technology. Google for more.
     
 Rate limiting and traffic control:
+
+
+
+Network Security: 
+
+Internet worms: Spreads automatically - Code that propogates and replicates over a network. 
+Internet virus: Spreads by manual action. "infection" of an existing program that results in the modifacation of behaviour
+Types of virus: 
+	- parasitic: infects executable files.
+	- memory resident: infects running programs.
+	- Boot-sector: spreads when the system boots.
+	- Polymotphic: encrypt part of virus programs using randomly generated keys.
+	
