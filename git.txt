@@ -186,6 +186,17 @@ $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  $> git push -u origin master
  View the contents of .git/config
  
+STACKOVERFLOW :  How do I update a GitHub forked repository? http://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository
+git remote add upstream https://github.com/whoever/whatever.git
+git checkout master
+git fetch upstream
+git rebase upstream/master  # OR If you don't want to rewrite the history of your master branch, do
+git merge upstream/master
+If you've rebased your branch onto upstream/master you may need to force the push in order to push it to your own forked repository on GitHub. You'd do that with:
+git push -f origin master
+You only need to use the -f the first time after you've rebased.
+
+
  Cloning a remote repository:
  $> git clone https://github.com/priteshranjan01/myNotes.git name_of_the_directory_in_which_to_store_files
  NOTE: if you want to checkout a particular branch, give '-b' option with 'git clone'
