@@ -196,7 +196,10 @@ If you've rebased your branch onto upstream/master you may need to force the pus
 git push -f origin master
 You only need to use the -f the first time after you've rebased.
 
-
+Configuring different Fetch and Pull URLs
+$> git remote set-url origin https://github.com/docopt/docopt.git
+$> git remote set-url --push origin https://github.com/priteshranjan01/docopt.git
+$> git remote -v  # verify that push and pull repositories are different
  Cloning a remote repository:
  $> git clone https://github.com/priteshranjan01/myNotes.git name_of_the_directory_in_which_to_store_files
  NOTE: if you want to checkout a particular branch, give '-b' option with 'git clone'
