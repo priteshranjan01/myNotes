@@ -212,3 +212,4 @@ $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  
  Setting up aliases: 
  $> git config --global alias.logp "log --oneline --decorate --graph"
+ $> git config --get-regexp alias  # to list all the aliases
