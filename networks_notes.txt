@@ -141,4 +141,4 @@ For : traffic control and ensuring that flows do not exceed rate. E.g. Audio
         Packet monitoring: tcpdump, wireshark, ethereal
         Flow monitoring: 
 
-Traffic engineering:
+Traffic engineering: Process of reconfiguring the network in response to changing traffic loads, to achieve some operational goal.
