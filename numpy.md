@@ -56,6 +56,8 @@ np.dsplit(asd, 3)
 
 ## Chapter 3: Getting Familiar with commonly used functions
 ```
+np.ones(shape, dtype=None, order='C')  # Return a new array of given shape and type, filled with ones.
+np.zeros(shape, dtype=float, order='C')  # Return a new array of given shape and type, filled with zeros.
 np.average(a, axis=None, weights=None, returned=False)  # Compute the weighted average along the specified axis.
 np.mean(a, axis=None, dtype=None, out=None, keepdims=False)  # Compute the arithmetic mean along the specified axis.
 np.amax(a, axis=None, out=None, keepdims=False)  # Return the maximum of an array or maximum along an axis.
@@ -68,9 +70,16 @@ np.msort(a)  # Return a copy of an array sorted along the first axis.
 np.var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the variance along the specified axis. or on flattened array if axis not specified
 np.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the standard deviation along the specified axis.
 np.where(condition, [x, y])  # Return elements, either from `x` or `y`, depending on `condition`.
+np.take(a, indices, axis=None, out=None, mode='raise')  # Take elements from an array along an axis. Similar to indexing arrays using arrays
 np.sqrt(x[, out])  # Return the positive square-root of an array, element-wise.
+np.apply_along_axis(func1d, axis, arr, *args, **kwargs)
+np.maximum(x1, x2[, out])  # Element-wise maximum of array elements. Compare two arrays and returns a new array containing the element-wise maxima.
+np.exp(x[, out])  # Calculate the exponential of all elements in the input array.
+np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)  # Returns `num` evenly spaced samples, calculated over the interval [`start`, `stop`]
+np.ndarray.fill(value)  # Fill the array with a scalar value.
+np.dot(a, b, out=None)  # Dot product of two arrays. For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation).
 ```
-- ### File I/O
+### File I/O
 ```
 identity_matrix = np.eye(3)  # creates an identity matrix with 3 ones along the diagonal
 np.savetxt('filename.txt', identity_matrix)  # Writes the matrix to the filename
@@ -81,4 +90,14 @@ np.loadtxt(fname, dtype=<class 'float'>, comments='#', delimiter=None, converter
     """ Load data from a text file.
     Each row in the text file must have the same number of values.
     """
+```
+### Dates
+```
+def str_date_to_num(date_str):
+	# [strftime and strptime behaviour](https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior)
+	return datetime.datetime.strptime(date_str, "%d-%m-%Y").date().weekday() 
+# Assuming column number 1 has the dates as strings
+dates = np.loadtxt('file_having_dates.csv', delimiter=',', converters={1:str_date_to_num}, unpack=True, usecols=(1,))
+
+np.datetime64('2015-09-05')
 ```
