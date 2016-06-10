@@ -56,6 +56,7 @@ np.dsplit(asd, 3)
 
 ## Chapter 3: Getting Familiar with commonly used functions
 ```
+np.nan 
 np.ones(shape, dtype=None, order='C')  # Return a new array of given shape and type, filled with ones.
 np.zeros(shape, dtype=float, order='C')  # Return a new array of given shape and type, filled with zeros.
 np.average(a, axis=None, weights=None, returned=False)  # Compute the weighted average along the specified axis.
@@ -78,6 +79,14 @@ np.exp(x[, out])  # Calculate the exponential of all elements in the input array
 np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)  # Returns `num` evenly spaced samples, calculated over the interval [`start`, `stop`]
 np.ndarray.fill(value)  # Fill the array with a scalar value.
 np.dot(a, b, out=None)  # Dot product of two arrays. For 2-D arrays it is equivalent to matrix multiplication, and for 1-D arrays to inner product of vectors (without complex conjugation).
+np.clip(a, a_min, a_max, out=None)  # Clip (limit) the values in an array.
+np.compress(condition, a, axis=None, out=None)  # Return selected slices of an array along given axis.
+np.prod(a, axis=None, dtype=None, out=None, keepdims=False)  # Return the product of array elements over a given axis.
+np.cumprod(a, axis=None, dtype=None, out=None)  # Return the cumulative product of elements along a given axis.
+np.nanmean(a, axis=None, dtype=None, out=None, keepdims=False)  # Compute the arithmetic mean along the specified axis, ignoring NaNs.
+np.nanvar(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the variance along the specified axis, while ignoring NaNs.
+np.nanstd(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the standard deviation along the specified axis, while ignoring NaNs.
+
 ```
 ### File I/O
 ```
