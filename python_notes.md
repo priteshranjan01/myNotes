@@ -1,4 +1,7 @@
 # python 2.7 
+
+- [Top 10 common mistakes](https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make)
+- [Good python questions](https://www.toptal.com/python#hiring-guide)
 - **REMEMBER**: `/` is integer division in 2.7.  In 3.5. `/` float division and  `//` is integer division.
 - `from __future__ import division`
 - `raw_input()`  **NOTE**: `raw_input` is not available in 3.5.1 (or 3.X)
