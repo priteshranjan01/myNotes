@@ -1,4 +1,7 @@
-#python 2.7 
+# python 2.7 
+
+- [Top 10 common mistakes](https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make)
+- [Good python questions](https://www.toptal.com/python#hiring-guide)
 - **REMEMBER**: `/` is integer division in 2.7.  In 3.5. `/` float division and  `//` is integer division.
 - `from __future__ import division`
 - `raw_input()`  **NOTE**: `raw_input` is not available in 3.5.1 (or 3.X)
@@ -29,11 +32,11 @@
 - `'BANANA FRIES 12'.rpartition(' ')`  --> `('BANANA FRIES', ' ', '12')`
 - `'BANANA FRIES 12'.rsplit(sep=' ', maxsplit=1)`  --> `['BANANA FRIES', '12']`
 - `print "{:.2f}".format(4.00001)`  Go through this [PyFormat Using % and .format() for great good!](https://pyformat.info/)
-
-- `import textwrap`
-- `textwrap.fill()`
-- `textwrap.wrap()`
-
+```
+ import textwrap
+ textwrap.fill()
+ textwrap.wrap()
+```
 - `print ("{0:o}, {0:X}, {0:b}, {0:d}".format(34))` # output: `42, 22, 100010, 34` # prints 34 in octal, hex, binary, and decimal 
 
 - builtins => `chr`, `ord`  # do help(chr) 
@@ -89,7 +92,7 @@ m.group(); m.groups(); m.start(); m.end(); m.span();
 
 ```
 """
-Sometimes you’re not only interested in what the text between delimiters is, but also need to know what the delimiter was. If capturing parentheses are used in the RE, then their values are also returned as part of the list. Compare the following calls:
+Sometimes you're not only interested in what the text between delimiters is, but also need to know what the delimiter was. If capturing parentheses are used in the RE, then their values are also returned as part of the list. Compare the following calls:
 """
 
 >>> p = re.compile(r'\W+')
