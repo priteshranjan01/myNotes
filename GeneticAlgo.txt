@@ -1,0 +1,48 @@
+Genetic Algorithms: Search based optimization technique, based on genetics and natural selection.
+Used to find optimal or near-optimal solutions.
+
+Population -> chromosomes -> Gene -> Allele
+Genotype: population in computation space
+phenotype: population in Real world
+Encoding is converting from phenotype to genotype
+Decoding is converting from genotype to phenotype
+Fitness Fucntion: Decides how good the solution is. Often the same as objective function.
+
+
+Basic Structure: 
+
+GA()
+   initialize population
+   find fitness of population
+   
+   while (termination criteria is reached) do
+      parent selection
+      crossover with probability pc
+      mutation with probability pm
+      decode and fitness calculation
+      survivor selection
+      find best
+   return best
+   
+   
+Population initialization: 
+    Random initialization -> populate with random initializations. Random solutions drive the population to optimality.
+    Heuristic initialization -> Don't do all generation by heuristics or diversity shall be less
+Population Models: 
+    Steady state GA: population doesn't increase. 2 parents -> 2 children
+    Generational GA: Generate 'n' offsprings. Whole population is replaced by the offsprings after one iteration.
+
+Fitness function: 
+    Takes candidates as input and decides how good are these solutions. 
+    Note that: in a lot computationally difficult problems it is easy to verify a correct solution but difficult to come with a correct solution.
+    
+    Fitness function should be easy to calculate.
+    
+Parent Selection: 
+    Good parents produce good children. But care should be taken that an extremely good parent doesn't take over the entire population in a few iterations; as this leads to the solutions being close to one another in the solution space thereby leading to a loss of diversity.
+        
+        Maintaining a good diversity, in the population is extremely crucial for the success for the GA.
+        This taking of the entire population be an extremely good population is is known as premature convergence.
+        
+        
+    

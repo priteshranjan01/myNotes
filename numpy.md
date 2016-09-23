@@ -67,10 +67,10 @@ np.median(a, axis=None, out=None, overwrite_input=False, keepdims=False)  # Comp
 np.msort(a)  # Return a copy of an array sorted along the first axis.
 np.var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the variance along the specified axis. or on flattened array if axis not specified
 np.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)  # Compute the standard deviation along the specified axis.
-np.where(condition, [x, y])  # Return elements, either from `x` or `y`, depending on `condition`.
+np.where(condition, [x, y])  # Return elements, either fr\om `x` or `y`, depending on `condition`.
 np.sqrt(x[, out])  # Return the positive square-root of an array, element-wise.
 ```
-- ### File I/O
+### File I/O
 ```
 identity_matrix = np.eye(3)  # creates an identity matrix with 3 ones along the diagonal
 np.savetxt('filename.txt', identity_matrix)  # Writes the matrix to the filename
