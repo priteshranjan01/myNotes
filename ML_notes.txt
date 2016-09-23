@@ -1,0 +1,11 @@
+Machine Learning (Georgia Tech's online MS in CS course in Udacity)
+-Supervised Learning, Unsupervised Learning, Reinforcement Learning
+
+Supervised learning: Classification, Regression
+
+ID3: Top-down algorithm to induce a decision tree. Choose an attribute to split the sample which gives the maximum "information gain"
+ID3 Bias(Inductive bias) Two type of biases 
+    1) Restriction Bias -> the hypothesis set that we care about. H
+    2) Preference bias -> tells us what source of hypothesis from this hypothesis set H, we prefer. h is subset of H
+    
+Regression: 
