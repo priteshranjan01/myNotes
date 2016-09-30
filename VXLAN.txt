@@ -1,0 +1,50 @@
+
+VXLAN related blogs: 
+Awesome blogs @ http://www.therandomsecurityguy.com/
+start by video: https://www.youtube.com/watch?v=Jqm_4TMmQz8
+http://networkstatic.net/setting-overlays-open-vswitch/
+Nice explanation on http://www.therandomsecurityguy.com/vxlan/
+CISCO blog VXLAN series: http://blogs.cisco.com/datacenter/digging-deeper-into-vxlan
+VmWare blog VxLAN series: http://blogs.vmware.com/vsphere/2013/04/vxlan-series-different-components-part-1.html
+ 
+Overlay Networks:
+Two key traits of overlay networks:
+    -It encapsulates original packets into a new header. For example, IPSec VPN, an overlay technology, encapsulates original IP frame in another IP header.
+    - Communication is typically established between two tunnel end points. For example, in an IPSec based VPN, which runs on the public internet, the tunnels are established between two sites.
+- As the name VXLANs (Virtual eXtensible LANs) implies, the technology is meant to provide the same services to connected Ethernet end systems that VLANs do today, but in a more extensible manner.  Compared to VLANs, VXLANs are extensible with regard to scale, and extensible with regard to the reach of their deployment.
+    
+-A Virtual Tunnel Endpoint (VTEP) is present at each vShpere host (or simple a server on which multiple VMs will be spawned)
+VTEP do the encapsulation and decapsulation of packets.
+For this they need to know about the remote VMs MAC and the IP of the VTEP the remote vm is associated with.
+This mac mapping is figured out through multicast messages. Exactly HOW ? I don't know. read about IGMP, and PIM.
+Some basic idea is : Hosts send an IGMP report message for a particular multicast address. the switch adds that port to that multicast group and when a multicast message is received, the switch forwards them through those ports.
+Hence, "Multicast protocol support is required in the physical network for VXLAN to work."
+
+"In VXLAN all the learning about the virtual machine MAC address and its association with VTEP IP is performed through the support of physical network. One of the protocols utilized in the physical network is IP multicast. VXLAN makes use of this IP multicast protocol to populate the forwarding tables in the VTEP."
+
+
+OVS : https://www.youtube.com/watch?v=rYW7kQRyUvA
+ovs-vsctl add-br mybridge
+ovs-vsctl show
+ifconfig mybridge up
+ifconfig 
+ovs-vsctl del-br mybridge
+ovs-vsctl add-port mybridge eth0
+ovs-vsctl show
+ping google.com/  # Lost connectivity to the internet. why?
+ifconfig eth0 0 
+dhclient mybridge 
+ifconfig
+route -n
+ping google.com # Now ping should work
+ip tuntap add mode tap vport1
+ip tuntap add mode tap vport2
+ifconfig vport1 up
+ifconfig vport2 up
+ovs-vsctl add-port mybridge vport1 --add-port mybridge vport2
+ovs-vsctl show
+#start two VMs and connect each with a vport just created
+ovs-appctl fdb/show mybridge
+ovs-ofctl show mybridge
+ovs-ofctl dump-flows mybridge
+ovs-vsctl list Bridge

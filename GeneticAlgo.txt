@@ -45,4 +45,10 @@ Parent Selection:
         This taking of the entire population be an extremely good population is is known as premature convergence.
         
         
-    
+Crossover: This is highly dependent on problem at hand. The main goal is to pick pick some traits from the parents and use them to create children.
+
+Mutation: A random tweak in the chromosome to maintain diversity. Mutation is essential for the convergence of the GA while crossover is not. 
+    We should do less mutation else it will become a random search.
+
+Surviver Selection: 
+Termination Condition: 
