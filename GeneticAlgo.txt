@@ -51,4 +51,8 @@ Mutation: A random tweak in the chromosome to maintain diversity. Mutation is es
     We should do less mutation else it will become a random search.
 
 Surviver Selection: 
+Elitism: it means the current fittest member of the population is always propagated to the next generation. Therefore, under no circumstance can the fittest member of the current population be replaced.
 Termination Condition: 
+    When there has been no improvement in the population for X iterations.
+    When we reach an absolute number of generations.
+    When the objective function value has reached a certain pre-defined value.
