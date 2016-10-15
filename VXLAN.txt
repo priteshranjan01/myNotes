@@ -1,4 +1,4 @@
-
+vxlan : RFC 7348 https://tools.ietf.org/html/rfc7348
 VXLAN related blogs: 
 Awesome blogs @ http://www.therandomsecurityguy.com/
 start by video: https://www.youtube.com/watch?v=Jqm_4TMmQz8
@@ -48,3 +48,42 @@ ovs-appctl fdb/show mybridge
 ovs-ofctl show mybridge
 ovs-ofctl dump-flows mybridge
 ovs-vsctl list Bridge
+ovs-vsctl list Port
+ovs-vsctl list Interface
+
+OpenFlow entries in OVS https://www.youtube.com/watch?v=FyV4MoQ3T0I
+ovs-ofctl show s1 # shows interface - OpenFlow port mappings
+ovs-ofctl add-flow s1 action=normal # behave like a normal L2 switch
+ovs-ofctl del-flow s1
+ovs-ofctl add-flow s1 priority=500,in_port=1,actions=output:2
+
+dl_type, nw_proto values and keywords (from ovs-ofctl MAN page):
+ip: dl_type=0x800
+arp: dl_type=0x806 
+(nw_proto=1 for requests,nw_proto=2 for replies)
+rarp: dl_type=0x8035
+icmp: dl_type=0x800,nw_proto=1
+tcp: dl_type=0x0800,nw_proto=6
+udp: dl_type=0x0800,nw_proto=17
+ipv6: dl_type=0x86dd
+tcp6: dl_type=0x86dd,nw_proto=6
+udp6: dl_type=0x86dd,nw_proto=17
+icmp6: dl_type=0x86dd,nw_proto=58
+
+NOTE: When specifying a higher layer match field, the lower layer protocols must be specified.
+
+mininet: https://www.youtube.com/watch?v=jmlgXaocwiE
+
+sudo mn
+nodes
+help
+pingall
+dump
+net
+iperf
+sudo mn -c
+sudo mn --link tc,bw=10,delay=10ms
+# prepend a command with 'sh' if you want it to be run from system shell and not mininet prompt
+
+Custom Topologies: https://www.youtube.com/watch?v=yHUNeyaQKWY
+
