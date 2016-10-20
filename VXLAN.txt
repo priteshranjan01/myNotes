@@ -56,19 +56,24 @@ ovs-ofctl show s1 # shows interface - OpenFlow port mappings
 ovs-ofctl add-flow s1 action=normal # behave like a normal L2 switch
 ovs-ofctl del-flows s1
 ovs-ofctl add-flow s1 priority=500,in_port=1,actions=output:2
+ovs-ofctl add-flow s1 priority=500,dl_type=0x0800,nw_dst=10.0.0.2,actions=output:4
+#L2 matching:
+ovs-ofctl add-flow s1 dl_src=<MAC1>,dl_dst=<MAC2>,actions=output:<OPENFLOW_PORT_NO>
 
 dl_type, nw_proto values and keywords (from ovs-ofctl MAN page):
-ip: dl_type=0x800
-arp: dl_type=0x806 
-(nw_proto=1 for requests,nw_proto=2 for replies)
-rarp: dl_type=0x8035
-icmp: dl_type=0x800,nw_proto=1
-tcp: dl_type=0x0800,nw_proto=6
-udp: dl_type=0x0800,nw_proto=17
-ipv6: dl_type=0x86dd
-tcp6: dl_type=0x86dd,nw_proto=6
-udp6: dl_type=0x86dd,nw_proto=17
-icmp6: dl_type=0x86dd,nw_proto=58
+
+arp:    dl_type=0x0806 (nw_proto=1 for requests,nw_proto=2 for replies)
+rarp:   dl_type=0x8035
+
+ip:     dl_type=0x0800
+icmp:   dl_type=0x0800, nw_proto=1
+tcp:    dl_type=0x0800, nw_proto=6
+udp:    dl_type=0x0800, nw_proto=17
+
+ipv6:   dl_type=0x86dd
+tcp6:   dl_type=0x86dd, nw_proto=6
+udp6:   dl_type=0x86dd, nw_proto=17
+icmp6:  dl_type=0x86dd, nw_proto=58
 
 NOTE: When specifying a higher layer match field, the lower layer protocols must be specified.
 
