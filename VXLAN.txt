@@ -86,9 +86,69 @@ pingall
 dump
 net
 iperf
-sudo mn -c
+sudo mn -c  # Clean-up
 sudo mn --link tc,bw=10,delay=10ms
 # prepend a command with 'sh' if you want it to be run from system shell and not mininet prompt
 
 Custom Topologies: https://www.youtube.com/watch?v=yHUNeyaQKWY
 
+
+VXLAN overlay networks with Open vSwitch: https://www.youtube.com/watch?v=tnSkHhsLqpM
+
+Tunnel creation:
+ovs-vsctl add-port s1 vtep_name --set interface vtep_name type=vxlan option:remote_ip=192.168.2.20 option:key=flow ofport_request=10
+
+ovs-ofctl add-flows s2 table=0,in_port=1,actions=set_field:100->tun_id,resubmit(,1)
+table=1,tun_id=100,dl_dst=00:00:00:00:00:01,actions=output:1
+table=1,tun_id=100,arp,nw_dst=10.0.0.1,actions=output:1
+
+Linux network namespaces:
+https://www.youtube.com/watch?v=_WgUwUf1d34
+   14  ip netns add green
+   15  ip netns add red
+   16  ip netns
+   17  ls /var/run/netns/
+   18  ip netns del green
+   19  ls /var/run/netns/
+   20  ip netns add green
+   21  ls /var/run/netns/
+   22  ip netns exec red ip link
+   23  ip netns exec green ip link
+   24  ip link
+   25  ovs-vsctl add-br OVS1
+   26  ip link
+   27  ovs-vsctl show
+   28  ip link add eth0-r type veth peer name veth-r
+   29  ip link
+   30  ip link show
+   31  ip link
+   32  ip link set eth0-r netns red
+   33  ip link
+   34  ip netns exec red ip link
+   35  ovs-vsctl add-port OVS1 veth-r
+   36  ip link
+   37  ovs-vsctl show
+   38  ip link add eth0-g type veth peer name veth-g
+   39  ip link set eth0-g netns green
+   40  ovs-vsctl add-port OVS1 veth-g
+   41  ovs-vsctl show
+   42  ip link
+   43  ip link set veth-r up
+   44  ip link
+   45  ip netns exec red ip link set dev lo up
+   46  ip netns exec green ip link set dev lo up
+   47  ip netns exec red ip link
+   48  ip netns exec red ip link set dev eth0-r up
+   49  ip netns exec green ip link set dev eth0-r up
+   50  ip netns exec green ip link set dev eth0-g up
+   51  ip netns exec red ip address
+   52  ip netns exec red ip address add 10.0.0.1/24 dev eth0-r
+   53  ip netns exec green ip address add 10.0.0.2/24 dev eth0-g
+   54  ip netns exec red ip address
+   55  ip netns exec red ip route
+   56  route
+
+   58  ip link set dev veth-g up
+   59  ip link set dev veth-r up
+   60  ip netns exec red bash
+   61  ifconfig
