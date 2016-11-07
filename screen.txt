@@ -1,0 +1,23 @@
+http://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/
+
+View the current running screens
+```
+prit@ubuntu:~$ screen -ls
+There is a screen on:
+        9318.pts-9.ubuntu       (11/06/2016 10:29:10 PM)        (Attached)
+1 Socket in /var/run/screen/S-prit.
+```
+ReConnect to the screen:
+`screen -r 9318`
+
+create a new screen window, just press “Ctrl-A” and “c“
+switch between screen using command “Ctrl-A” and “n“ => for next screen
+“Ctrl-A” and “p“ for next screen.
+"Ctrl-A" and 'd' to detach.
+
+
+With this screen logging, you don’t need to write down every single command that you have done. To activate screen logging function, just press “Ctrl-A” and “H“. (Please be careful, we use capital ‘H’ letter. Using non capital ‘h’, will only create a screenshot of screen in another file named hardcopy).
+
+At the bottom left of the screen, there will be a notification that tells you like: Creating logfile “screenlog.0“. You will find screenlog.0 file in your home directory.
+
+This feature will append everything you do while you are in the screen window. To close screen to log running activity, press “Ctrl-A” and “H” again.
