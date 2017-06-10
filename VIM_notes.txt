@@ -32,3 +32,20 @@ To comment out blocks in vim:
 	press Esc
 
 	Give it a second to work.
+
+------------------
+Source: http://www.linuxjournal.com/magazine/vim-c-programmers
+While editing a file with VIM, these command do their regular jobs.
+:pwd  :cd 
+
+:e foo.c  --> Open foo.c 
+:e #      --> Return to the previously opened file.
+:ls       --> Display the list of opened files in current VIM session
+:bd <number> --> Close the file represented by number got from :ls
+]]        --> Skip multiple functions fast. Use [[ to browse backwards.
+
+BOOKMARK cursor position:
+Go to some line you want to bookmark by :22 and enter mb in command mode.
+b is the name of line number 22. You can navigate to 22 by simple typing 'b
+in command mode. (single quote + <mark name>)
+
