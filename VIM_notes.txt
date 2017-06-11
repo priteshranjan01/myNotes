@@ -1,4 +1,4 @@
-Search and replace : http://vim.wikia.com/wiki/Search_and_replace
+VIM Search and replace : http://vim.wikia.com/wiki/Search_and_replace
 
 Basic search and replace:
 	:%s/foo/bar/g		Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
@@ -30,8 +30,8 @@ To comment out blocks in vim:
 	press d or x to delete characters, repeatedly if necessary
 
 	press Esc
-
-	Give it a second to work.
+	
+    Give it a second to work.
 
 ------------------
 Source: http://www.linuxjournal.com/magazine/vim-c-programmers
@@ -43,9 +43,40 @@ While editing a file with VIM, these command do their regular jobs.
 :ls       --> Display the list of opened files in current VIM session
 :bd <number> --> Close the file represented by number got from :ls
 ]]        --> Skip multiple functions fast. Use [[ to browse backwards.
+:se list  --> Check which whitespaces are tabs. Whatever displayed as ^I in blue are tabs.
+:se hlsearch -> TO highlight searches
+:se nohlsearch -> To turn off highlighting
+
+
+
+%  --> Place cursor on brace/ or #if block and % shall take you to the matching brace.
+
+gg=G  --> typing this in command mode indents the whole file.
+:help indent.txt  --> learn more about indenting.
+If ctags is enabled then, Ctrl-N or Crl-P does auto completion and possible hints.
+
+Multiple files in different tabs in VIM-7
+:tabe <file-name>  --> Open a file in new tab.
+:tabn or :tabp to switch active tab.
+Map keys <F7> to :tabp and <F8> to :tabn, write the below two lines in .vimrc file
+:map <F7> :tabp<CR>
+:map <F8> :tabn<CR>
 
 BOOKMARK cursor position:
 Go to some line you want to bookmark by :22 and enter mb in command mode.
 b is the name of line number 22. You can navigate to 22 by simple typing 'b
 in command mode. (single quote + <mark name>)
+---------------
+Selecting a text
+
+V       - selects entire lines 
+v       - selects range of text
+ctrl-v  - selects columns
+gv      - reselect block
+
+After selecting the text, try d to delete, or y to copy, or :s/match/replace/, or :center, or !sort, or... 
+-----------------------------------------
+
+Nice read for refreshing VIM tricks:
+https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
 
