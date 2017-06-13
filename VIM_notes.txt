@@ -75,8 +75,26 @@ ctrl-v  - selects columns
 gv      - reselect block
 
 After selecting the text, try d to delete, or y to copy, or :s/match/replace/, or :center, or !sort, or... 
+
+-----------------------------------------
+Text folding:
+:set foldmethod=indent -> Nicely indents code blocks.
+zj and zk move the cursor to next and previous folds.
+zo opens a fold at the cursor by one level.
+zO oepns all folds at the cursor.
+zm increases the foldlevel by one.
+zM closes all open folds.
+zr decreases the foldlevel by one.
+zR decreases the foldlevel to zero -- all folds will be open.
+[z move tho start of open fold.
+]z move to end of open fold.
 -----------------------------------------
 
 Nice read for refreshing VIM tricks:
 https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
+
+--------------------------
+SHIFTING blocks visually
+In normal mode: >> to indent the current line , or << to unindent.
+In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
