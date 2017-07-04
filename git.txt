@@ -138,6 +138,8 @@ $> git branch  # this will list all the branches currently present
 $> git branch new_branch  # create another branch called 'new_branch'
 $> git branch -r  # lists all the remote branches
 $> git branch -a  # lists all the branches
+$> git branch -m modified_branch_name   # Renames the branch you have currently checked out
+$> git branch -m old_name new_name     # Renames an branch's name from old_name to new_name
 $> git checkout new_branch  # switch to new_branch
 $> git checkout new_branch_name -b  # Create a new branch,  check that out and switch to it 
 
@@ -231,3 +233,8 @@ $> git remote -v  # verify that push and pull repositories are different
 http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-on-github
 git config --global credential.helper "cache --timeout=36000"
 This command makes the git client cache the password for 36000 seconds.
+
+View git diff in vimdiff 
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global alias.d difftool

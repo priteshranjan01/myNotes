@@ -80,12 +80,16 @@ After selecting the text, try d to delete, or y to copy, or :s/match/replace/, o
 Text folding:
 :set foldmethod=indent -> Nicely indents code blocks.
 zj and zk move the cursor to next and previous folds.
-zo opens a fold at the cursor by one level.
-zO oepns all folds at the cursor.
+At the cursor, 
+za (toggle), zc (close), zo (open)  : One level of folding 
+zA (toggle), zC (close), zO (open)  : All folding levels
+
+Throughout the file:
 zm increases the foldlevel by one.
 zM closes all open folds.
 zr decreases the foldlevel by one.
 zR decreases the foldlevel to zero -- all folds will be open.
+
 [z move tho start of open fold.
 ]z move to end of open fold.
 -----------------------------------------
@@ -98,3 +102,36 @@ SHIFTING blocks visually
 In normal mode: >> to indent the current line , or << to unindent.
 In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
+CSCOPE https://a0gustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
+
+
+
+---------- TMUX --------------------
+http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
+
+session -> window -> pane
+tmux new -s session_name    --> Create a new session
+tmux ls                     --> List all the sessions
+tmux a                      --> Attach to the first session 
+tmux a -t session_name      --> Attach to session_name
+tmux detach  || CTRL-b d    --> Detach the session
+tmux kill-session -t session_name  --> kill a tmux session
+tmux rename-session -t old_name new_name
+
+-----
+CTRL-b ?   --> Help
+CTRL-b z   --> Go fullscreen, Hit CTRL-b z again to shrink it back.
+C-b C-<arrow key>: Resize pane in direction of <arrow key>  --> "This is an interesting one. Yes, you need Ctrl in your prefix and also your command key. I find it easiest to only release the b key after the prefix key and keep Ctrl pressed all the time while I hit the arrow key repeatedly."
+CTRL-b space-bar  -> change the orientation of panes from horizontal to vertical and vice-versa
+CTRL-b %  -> Split into two panes, vertically
+CTRL-b "  -> Split into two panes, horizontally
+
+Navigating between panes:
+CTRL-b <arrow-keys>  or CTRL-B   --> Rotate between panes
+CTRL-d or exit --> close a window or pane
+
+
+-- Windows --
+CTRL-b c  --> Create a new window
+CTRL-b p --> switch to previous window
+CTRL-b n --> switch to next window
