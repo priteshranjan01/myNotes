@@ -238,3 +238,7 @@ View git diff in vimdiff
 git config --global diff.tool vimdiff
 git config --global difftool.prompt false
 git config --global alias.d difftool
+
+
+Git Squash the commits into one  http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
+> git rebase -i HEAD~3
