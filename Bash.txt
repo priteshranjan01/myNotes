@@ -1,3 +1,19 @@
+https://ryanstutorials.net/bash-scripting-tutorial/bash-variables.php
+here are a few other variables that the system sets for you to use as well.
+
+$0 - The name of the Bash script.
+$1 - $9 - The first 9 arguments to the Bash script. (As mentioned above.)
+$# - How many arguments were passed to the Bash script.
+$@ - All the arguments supplied to the Bash script.
+$? - The exit status of the most recently run process.
+$$ - The process ID of the current script.
+$USER - The username of the user running the script.
+$HOSTNAME - The hostname of the machine the script is running on.
+$SECONDS - The number of seconds since the script was started.
+$RANDOM - Returns a different random number each time is it referred to.
+$LINENO - Returns the current line number in the Bash script.
+
+TIP: If you type the command env on the command line you will see a listing of other variables which you may also refer to.
 BASH Lynda.com
 
     $> touch file_{1..1000}
@@ -32,7 +48,7 @@ learn more about grep, awk, sed, and cut
     # String replacement, 
     $> fruit = "apple banana banana cherry"
     $> echo ${fruit/banana/cherry}  # Replaces first occurance of banana with cherry
-    $> echo ${fruit//banana/litchi}  # Replaces all occurance of banana with cherry
+    $> echo ${fruit//banana/litchi}  # Replaces all occurance of banana with litchi
     $> echo ${fruit/#banana/litchi}  # Replaces banana with litchi only if banana is at the begining of fruit
     $> echo ${fruit/%banana/litchi  # Replaces banana with litch only if banana is at the end of fruit
     # Coloring and styling text in bash, look for them on the web. Although it's quite tedious nonetheless it's cool.
@@ -53,13 +69,13 @@ Control Statements:
 if else elif fi
 
 a=5
-if [ $a -gt 4]; then
+if [ $a -gt 4 ]; then
     echo $a is greater than 4
 else
     echo $a is not greater than 4
 fi
 
-b="This is my string!"
+b="This is my string\!"
 if [[ $a == [0-9]+ ]]; then 
     echo "there are numbers in the string: $a"
 else

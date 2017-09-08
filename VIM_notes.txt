@@ -94,6 +94,11 @@ zR decreases the foldlevel to zero -- all folds will be open.
 ]z move to end of open fold.
 -----------------------------------------
 
+:set expandtab      -> To insert space characters whenever the tab key is pressed
+:set tabstop=4      -> 
+:set shiftwidth=4   -> To change the number of space characters inserted for indentation
+:set autoindent
+-----------------------------------------
 Nice read for refreshing VIM tricks:
 https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
 
