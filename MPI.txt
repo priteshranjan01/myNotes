@@ -1,0 +1,35 @@
+Book : Parallel programming for MultiCore and Cluster Systems. Thomas Rauber, Gudula Runger.
+
+MPI Point-to-Point Communication:
+
+BLOCKING Operations:
+
+int MPI-Send(void *smessage, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm);
+int MPI_Recv(void *rmessage, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status);
+- Above two operations are blocking and asynchronous. (Not sure about asynchronous).
+
+source = MPI_ANY_SOURCE
+tag    = MPI_ANY_TAG
+comm = MPI_COMM_WORLD
+
+After completion of MPI_Recv(),
+status contains the following information:
+• status.MPI_SOURCE specifies the rank of the sending process;
+• status.MPI_TAG specifies the tag of the message received;
+• status.MPI_ERROR contains an error code.
+
+Information about the length of message received can be extracted from status variable by the following call:
+* int MPI_Get_count (MPI_Status *status, MPI_Datatype datatype, int *count_ptr);
+
+where status is a pointer to the data structure status returned by MPI_Recv(). The function returns the number of elements received in the variable pointed to by count_ptr.
+
+int MPI_Sendrecv (void *sendbuf, int sendcount, MPI_Datatype sendtype, int dest, int sendtag, void *recvbuf, int recvcount, MPI_Datatype recvtype, int source, int recvtag, MPI_Comm comm, MPI_Status *status);
+
+
+NON-BLOCKING Operations:
+int MPI_Isend (void *buffer, int count, MPI_Datatype type, int dest, int tag, MPI_Comm comm, MPI_Request *request);
+int MPI_Irecv (void *buffer, int count, MPI_Datatype type, int source, int tag, MPI_Comm comm, MPI_Request *request);
+int MPI_Test (MPI_Request *request, int *flag, MPI_Status *status);
+
+
+printf("\n%d %d %d %d %d",MPI_SUCCESS, MPI_ERR_COMM, MPI_ERR_COUNT, MPI_ERR_TYPE, MPI_ERR_BUFFER); = 0 5 2 3 1
