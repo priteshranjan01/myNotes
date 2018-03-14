@@ -140,3 +140,7 @@ CTRL-d or exit --> close a window or pane
 CTRL-b c  --> Create a new window
 CTRL-b p --> switch to previous window
 CTRL-b n --> switch to next window
+
+to increase scroll history add the folliwing in your ~/.tmux.conf file
+set -g history-limit 1000000
+you need to create this file under your ~ folder

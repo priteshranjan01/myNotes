@@ -9,6 +9,10 @@ GIT Configuration:
     git config user.email
     git config --global core.editor "vim"
     git config --global color.ui true
+Disable ssl verification:
+    git config http.sslVerify "false"
+    or
+    GIT_SSL_NO_VERIFY=true 
 
 GIT Auto-Completion: Look on web, how to configure in linux. Already available in windows
 Initializing a repository:
@@ -242,3 +246,4 @@ git config --global alias.d difftool
 
 Git Squash the commits into one  http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 > git rebase -i HEAD~3
+
