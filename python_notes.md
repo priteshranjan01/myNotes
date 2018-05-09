@@ -117,3 +117,13 @@ Sometimes you're not only interested in what the text between delimiters is, but
 Super class method call syntax:
 2.7: super(childClass, self).method_of_parent()
 3.X: super().method_of_parent()
+
+Python 3 cool features:
+`bit_length`, 
+Extended Unpacking: https://www.python.org/dev/peps/pep-3132/
+```
+import textwrap as tw
+feedback = "This is an example feedback"
+tw.fill(feedback, 8)  # Returns-> 'This is\nan\nexample\nfeedback'
+tw.wrap(feedback, 8)  # Returns-> ['This is', 'an', 'example', 'feedback']
+```
