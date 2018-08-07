@@ -1,3 +1,7 @@
+Open file in read only mode:
+	vim -R file_name
+	or vim -M file_name
+
 VIM Search and replace : http://vim.wikia.com/wiki/Search_and_replace
 
 Basic search and replace:
@@ -30,15 +34,15 @@ To comment out blocks in vim:
 	press d or x to delete characters, repeatedly if necessary
 
 	press Esc
-	
+
     Give it a second to work.
 
 ------------------
 Source: http://www.linuxjournal.com/magazine/vim-c-programmers
 While editing a file with VIM, these command do their regular jobs.
-:pwd  :cd 
+:pwd  :cd
 
-:e foo.c  --> Open foo.c 
+:e foo.c  --> Open foo.c
 :e #      --> Return to the previously opened file.
 :ls       --> Display the list of opened files in current VIM session
 :bd <number> --> Close the file represented by number got from :ls
@@ -69,19 +73,19 @@ in command mode. (single quote + <mark name>)
 ---------------
 Selecting a text
 
-V       - selects entire lines 
+V       - selects entire lines
 v       - selects range of text
 ctrl-v  - selects columns
 gv      - reselect block
 
-After selecting the text, try d to delete, or y to copy, or :s/match/replace/, or :center, or !sort, or... 
+After selecting the text, try d to delete, or y to copy, or :s/match/replace/, or :center, or !sort, or...
 
 -----------------------------------------
 Text folding:
 :set foldmethod=indent -> Nicely indents code blocks.
 zj and zk move the cursor to next and previous folds.
-At the cursor, 
-za (toggle), zc (close), zo (open)  : One level of folding 
+At the cursor,
+za (toggle), zc (close), zo (open)  : One level of folding
 zA (toggle), zC (close), zO (open)  : All folding levels
 
 Throughout the file:
@@ -95,9 +99,19 @@ zR decreases the foldlevel to zero -- all folds will be open.
 -----------------------------------------
 
 :set expandtab      -> To insert space characters whenever the tab key is pressed
-:set tabstop=4      -> 
+:set tabstop=4      ->
 :set shiftwidth=4   -> To change the number of space characters inserted for indentation
-:set autoindent
+set number
+set relativenumber
+set autoindent
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+Sometimes vimdiff screws up the color scheme. The best way to fix it is to enter
+:highlight while inside vim. Then copy the values of the combination which looks good.
 -----------------------------------------
 Nice read for refreshing VIM tricks:
 https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
@@ -108,39 +122,3 @@ In normal mode: >> to indent the current line , or << to unindent.
 In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
 CSCOPE https://a0gustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
-
-
-
----------- TMUX --------------------
-http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
-
-session -> window -> pane
-tmux new -s session_name    --> Create a new session
-tmux ls                     --> List all the sessions
-tmux a                      --> Attach to the first session 
-tmux a -t session_name      --> Attach to session_name
-tmux detach  || CTRL-b d    --> Detach the session
-tmux kill-session -t session_name  --> kill a tmux session
-tmux rename-session -t old_name new_name
-
------
-CTRL-b ?   --> Help
-CTRL-b z   --> Go fullscreen, Hit CTRL-b z again to shrink it back.
-C-b C-<arrow key>: Resize pane in direction of <arrow key>  --> "This is an interesting one. Yes, you need Ctrl in your prefix and also your command key. I find it easiest to only release the b key after the prefix key and keep Ctrl pressed all the time while I hit the arrow key repeatedly."
-CTRL-b space-bar  -> change the orientation of panes from horizontal to vertical and vice-versa
-CTRL-b %  -> Split into two panes, vertically
-CTRL-b "  -> Split into two panes, horizontally
-
-Navigating between panes:
-CTRL-b <arrow-keys>  or CTRL-B   --> Rotate between panes
-CTRL-d or exit --> close a window or pane
-
-
--- Windows --
-CTRL-b c  --> Create a new window
-CTRL-b p --> switch to previous window
-CTRL-b n --> switch to next window
-
-to increase scroll history add the folliwing in your ~/.tmux.conf file
-set -g history-limit 1000000
-you need to create this file under your ~ folder

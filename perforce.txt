@@ -1,0 +1,79 @@
+https://stackoverflow.com/questions/17267218/perforce-for-git-users
+
+Git is distributed, Perforce is centralized. That creates all the differences.
+git checkout -> perforce sync
+git commit -> perforce submit
+perforce depot -> a repository of files that live in a perforce server.
+perforce workspace or client is an object in the system that maps a set of files
+in the Perforce server to a location on a user's file system.
+
+'workspace view' specifies the set of files in the depot that should be mapped
+ to the local machine.
+
+Explicit checkout vs Implicit Checkout.
+
+The GIT way of making changes where ever I want and then do a git diff to see
+ the changes is not the normal way in Perforce. See 'allwrite' option in
+ perforce to enable such behavior. You have to first specify which file you want
+ to edit by p4 edit command. P4 diff shows the changes you have made.
+
+Explicit checkout is when you tell perforce the restricted set of files that you
+ will be working with. This is the recommended way to work. p4 edit/add/delete
+ then p4 submit.
+
+git stash -> p4 shelve
+git local branching -> either perforce shelves or task branches
+git blame -> p4 annotate or perforce timelapse view from the GUI
+
+https://www.perforce.com/perforce/r14.2/manuals/p4guide/chapter.files.html
+To change files in the depot, you open them in a changelist, make any changes
+to the files, and then submit the changelist. A changelist contains a list of
+files, their revision numbers, and the operations to be performed on the files.
+Unsubmitted changelists are referred to as pending changelists.
+
+By default opened files are placed in a default changelist.
+To specify a changelist use
+$ p4 edit -c <changelist_number> <filename>
+
+Reopen a file in different changelist:
+$ p4 reopen -c <new_changelist_number> <filenames>
+
+Deleting Changelists:
+$ p4 change -d <changenumber>
+
+Creating numbered changelist:
+$ p4 change # Will open a changelist form to enter the description.
+$ p4 submit -c <changelist_number>
+
+To remove files from the changelist and discard any changes:
+$ p4 revert -c <changenum>
+
+Renaming and moving files:
+$ p4 move source_file target_file
+
+Shelve- temporarily preserve work in progress for your own use, or for review
+by others. Shelving enables you to temporarily cache files in the shared service
+ without formally submitting them to the depot.
+
+$ p4 edit <filename>
+Make changes.
+# Shelve the changes. The output will contain a shelve number. This shelve
+# number is the identifier to the set of changes in this shelve.
+$ p4 shelve
+# Unshelve the changelist (123) in a new changelist (124).
+$ p4 unshelve -s 123 -c 124 <filename>
+# Submit the changelist to the server.
+$ p4 submit -c 124
+
+# Discard the shelved files:
+$ p4 shelve -d -c 124.
+
+TIP: Always move the shelved files into a new pending changelist before
+submitting that changelist.
+
+Displaying information about changelists
+$> p4 changes -m <count>
+$> p4 changes -s <status>
+$> p4 changes -u priteshr
+$> p4 changes -c prit_mac
+$> p4 describe <changenum>
