@@ -46,7 +46,7 @@ $ p4 change # Will open a changelist form to enter the description.
 $ p4 submit -c <changelist_number>
 
 To remove files from the changelist and discard any changes:
-$ p4 revert -c <changenum>
+$ p4 revert -c <changelist_number>
 
 Renaming and moving files:
 $ p4 move source_file target_file
@@ -77,3 +77,17 @@ $> p4 changes -s <status>
 $> p4 changes -u priteshr
 $> p4 changes -c prit_mac
 $> p4 describe <changenum>
+$> p4 describe -S <changenum> # to display the diff also.
+
+Lock a file so that no other user can submit the changes:
+If no file argument is provided, all open files in the default changelist are locked.
+$> p4 lock -c <changelist_number>
+$> p4 lock -c <changelist_number> <filename>
+
+Unlock all files in a changelist:
+$> p4 unlock -c <changelist_number>
+$> p4 unlock -c <changelist_number> -f <filename>
+
+
+To invoke "p4 edit" on the current opened file
+:!p4 edit %
