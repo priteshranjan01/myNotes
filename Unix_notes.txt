@@ -2,13 +2,13 @@ Ctrl a : move the cursor to the begining of the line
 Ctrl e : move the cursor to the end of the line
 apropos - search the manual page names and descriptions. E.G. $> apropos chmo
 ls -lah
-mv and cp options: 
+mv and cp options:
     -n : no overrite
     -f : force replace ( Default)
     -i : interactive, ask (if there is a conflict) before replacing a file
     -v : verbose
 
-Hard Links: $> ln file_to_link hardlink 
+Hard Links: $> ln file_to_link hardlink
 Symbolic links: $> ln -s file_to_link symlink
 
 $> find ./ -name delete.txt -and -not -path *ab*
@@ -26,11 +26,11 @@ $> uname -mnrsvp
 $> hostname
 $> domainname
 
-Disk information commands: 
+Disk information commands:
 DISK FREE: $> df -h  # -h for base 2, -H for base 10 in space calculations
-DISK Usage: $> du ~/path -ahd 1  # d for depth, a for all (not only directories but files also), 
+DISK Usage: $> du ~/path -ahd 1  # d for depth, a for all (not only directories but files also),
 
-Processes: 
+Processes:
 $> ps -ax  # a for all users, x for background processes
 $> ps u  # NOTE: there is no dash before u
 $> ps -ef  #
@@ -51,7 +51,7 @@ To print a process tree:
 To get info about threads:
   ps -eLf
 
-Monitoring processes: 
+Monitoring processes:
 
 $> top -n 10 -o CPU -s 3 -U pritesh  # Top 10 processes sort by CPU field, and refresh every 3 seconds
 TIP: top command is interactive, hit ? while top is displaying information and follow the instructions
@@ -75,7 +75,7 @@ $> expr 1 \* 99  # #escape * not to mistake for wildcard character
 
 $> units  # Check out on google
 
-History shortcuts: 
+History shortcuts:
 $> !3 # References history command no 3
 $> !-2  # References command which was 2 commands back
 $> !vim  # References the most recent command begining with "vim"
@@ -83,7 +83,7 @@ $> !!  # References previous command
 $> !$  # References previous command's arguments
 
 Alias # Write in .bashrc or .bash_profile for persisting
-$> alias ll='ls -la'
+$> alias ll='ls -lA'
 $> alias hello='echo "Hello World!"'
 $> alias
 $> unalias hello
@@ -105,12 +105,12 @@ Command prompt formatting codes: Although I am too lazy to change the bash promp
 \$      when UID is 0(root), a '#', otherwise a "$"
 
 
-GREP : Hooyah !! Global Regular Expression Print. 
+GREP : Hooyah !! Global Regular Expression Print.
 NOTE ==> google for Reg Ex character classes, eg [:alpha:] for ALphabetic characters, Looks like it is specific to grep.
 $> echo 'georGGe lYnda Mary' | grep [[:lower:]]
 
 WARNING: Do remember the difference between BASIC and EXTENDED regex set. Google if if you don't remember. + | and a lot others are in extended set, and you have to use -E option to tell grep to consider the extended set
-e.g. $> grep -E 'ap+le' fruitnames.txt  
+e.g. $> grep -E 'ap+le' fruitnames.txt
 e.g. $> grep -E 'apple|litchi' fruitnames.txt
 
 $> grep apple fruitnames.txt
@@ -134,7 +134,7 @@ $> cut -c 2-10 dir_content.txt
 $> cut -c 2-10,29-34 dir_output.txt  # Notice there is no space after ,
 $> cut -c 2-10,29-34,48- dir_output.txt
 
-diff: 
+diff:
 -i  case insensitive
 -b  ignore changes to blank characters
 -w  ignore all whitespace
