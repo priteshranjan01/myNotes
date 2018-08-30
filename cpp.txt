@@ -1,0 +1,5 @@
+C++ casts:
+  - static_cast:  operations are considered safe.
+  - reinterpret_cast<type>: Highly unsafe
+  - dynamic_cast <type>: Used with classes.
+  - const_cast <type>: Cast away const-ness.

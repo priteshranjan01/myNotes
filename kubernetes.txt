@@ -1,0 +1,137 @@
+The Kubernetes Master is a collection of three processes that run on a single
+ node in your cluster, which is designated as the master node.
+ Those processes are: kube-apiserver, kube-controller-manager and kube-scheduler.
+
+ Each individual non-master node in your cluster runs two processes:
+     kubelet, which communicates with the Kubernetes Master.
+     kube-proxy, a network proxy which reflects Kubernetes networking services on each node
+
+Every Kubernetes Node runs at least:
+ - Kubelet, a process responsible for communication between the Kubernetes Master and the Node; it manages the Pods and the containers running on a machine.
+ - A container runtime (like Docker, rkt) responsible for pulling the container image from a registry, unpacking the container, and running the application.
+
+Node (running kubelet and Docker daemon) > Pod > Container
+
+ minikube version
+
+ minikube start
+
+ kubectl version
+
+ kubectl cluster-info
+
+View the nodes in the cluster
+$ kubectl get nodes
+
+Deploy an application
+$ kubectl run kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 --port=8080
+
+List the deployments:
+$ kubectl get deployments
+
+Start a proxy on master to communicate with the cluster.
+$ kubectl proxy
+
+Test the proxy:
+$ curl http://localhost:8001/version
+
+Get the pod name and store in environment variable.
+$ export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}{{end}}')
+
+Make an HTTP request to the application running in that pod:
+$ curl http://localhost:8001/api/v1/namespaces/default/pods/$POD_NAME/proxy/
+
+
+The most common operations can be done with the following kubectl commands:
+    kubectl get - list resources
+    kubectl describe - show detailed information about a resource
+    kubectl logs - print the logs from a container in a pod. Anything that the application would normally send to STDOUT becomes logs for the container within the Pod.
+    kubectl exec - execute a command on a container in a pod
+      e.g. kubectl exec $POD_NAME env
+           kubectl exec -ti $POD_NAME bash # start a bash session in the POD's container.
+
+kubectl get services
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl get services
+kubectl describe services/kubernetes-bootcamp
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+curl $(minikube ip):$NODE_PORT
+kubectl describe kubernetes-bootcamp
+kubectl describe deployment/kubernetes-bootcamp
+kubernetes describe deployment
+kubectl describe deployment
+kubectl get pods -l run=kubernetes-bootcamp
+kubectl get services -l run=kubernetes-bootcamp
+export POD_NAME=$(kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}')
+echo Name of the Pod: $POD_NAME
+kubectl label pod $POD_NAME app=v1
+kubectl describe pods $POD_NAME
+kubectl get pods -l app=v1
+kubectl get services
+kubectl delete service -l run=kubernetes-bootcamp
+curl $(minikube ip):$NODE_PORT
+kubectl exec -ti $POD_NAME curl localhost:8080
+
+
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+kubectl get deployments
+kubectl get pods -o wide
+kubectl describe deployments/kubernetes-bootcamp
+kubectl describe services/kubernetes-bootcamp
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+echo $(minikube ip)
+curl $(minikube ip):$NODE_PORT
+kubectl scale deployments/kubernetes-bootcamp --replicas=2
+kubectl get deployments
+kubectl get pods -o wide
+
+
+kubectl get pods
+kubectl describe pods
+kubectl get deployments
+kubectl get pods
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+kubectl get pods
+kubectl describe services/kubernetes-bootcamp
+export NODE_PORT=$(kubectl get services/kubernetes-bootcamp -o go-template='{{(index .spec.ports 0).nodePort}}')
+echo NODE_PORT=$NODE_PORT
+curl $(minikube ip):$NODE_PORT
+kubectl rollout status deployments/kubernetes-bootcamp
+kubectl describe pods
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v10
+kubectl get deployments
+kubectl get pods
+kubectl describe pods
+kubectl rollout undo deployments/kubernetes-bootcamp
+kubectl get pods
+kubectl describe pods
+kubectl api-versions
+    - --requestheader-allowed-names=front-proxy-client
+
+1. Resolve DNS queries based on Client IP address.
+    Some DNS resolvers return the server IP address based on client's geographic
+     location (which is approximated from the client's IP address).
+    However, the granularity is not at the level of single IP addresses and hence not suitable for our case.
+
+2. After DNS resolution, the request will come to our production server.
+   Is it possible (and allowed) to install iptable rules on our production server to redirect
+   traffic from the particular source IP address to our debug servers?
+
+   Otherwise, is there a common system from which the traffic bifurcates? (like load balancer, router?)
+   then we can install those rules on these systems.
+
+3. Have a different FQDN for debug servers and then ask the client to try the same
+   thing with the different FQDN.
+
+4. Ask the client to change the the entry in it's Host file.
+
+
+https://kubernetes.io/docs/tutorials/hello-minikube/
+
+https://medium.com/uptime-99/kubernetes-hpa-autoscaling-with-custom-and-external-metrics-da7f41ff7846
+
+https://sysdig.com/blog/kubernetes-scaler/
+
+https://medium.com/@marko.luksa/kubernetes-autoscaling-based-on-custom-metrics-without-using-a-host-port-b783ed6241ac

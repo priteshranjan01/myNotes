@@ -1,0 +1,90 @@
+Indexers: Convert machine data to events which are then stored in splunk database.
+Search Head: handle search request from users and distribute the request the request
+  to the Indexers.
+Forwarder: Reside on the machines where the data originates. Forwarder send the
+  data to the Indexers.
+
+@ - used in the "Advanced" section of the time range picker to round down to nearest unit of specified time.
+
+SPL Fundamentals: Splunk Search Language.
+Search terms:
+Commands:
+  - Fields: Limits fields displayed and can make search faster.
+            e.g. fields status
+            Use a negative (-) sign between fields keyword and the value.
+            e.g. fields - status clientip
+            Excluding fields using the Fields Command will NOT benefit performance.
+  - Table: Specified fields are kept in the result. It retains the data in a tabular form.
+            e.g. table jsessionID, product_name, price
+  - Rename: Rename the columns.
+            e.g. rename jsessionID as Session ID
+            Once renamed, the subsequent queries MUST use the new name.
+  - Dedup: Remove the duplicate entries.
+            e.g. dedup first_name second name
+            As a best practice and for best performance, place dedup as early in the search as possible.
+  - Sort: Display the report in ascending or descending order.
+            e.g. sort vendor_ID product_name
+            Add minus (-) sign for descending order.
+            e.g. sort - sale_price vendor  -> Since there is a space between the
+             minus sign and the column names all the columns shall be sorted by descending order.
+            Remove the space to apply the order on only one column.
+
+            limit = 20 -> limits the events to 20
+
+  - top: finds the most common fields. Automatically limits the result to 10 rows.
+            use 'limit=<count>' to limit the number of rows. Use limit=0 to get all results.
+            countfield = <display_name of count field>
+            percentfield = <display_name of percent field>
+            showcount = True/False
+            showperc = True/False
+            useother = True -> this will add a rows for "OTHER"
+
+            'by' clause:
+
+  - rare: opposite of top command.
+            e.g. index=main sourcetype="access_combined_wcookie" AND status=200 | stats sum(bytes) as TotalBytes by file | rare TotalBytes
+
+  - stats: Common statistics functions:
+            count: Number of events matching search criteria.
+              e.g. index=sales sourcetype=vendor_sales | stats count as "Total sells by vendors" by product_name, categoryID, sale_price
+              e.g. | stats count(action) as ActionEvents, count as "total events"
+              e.g. index = main sourcetype="access_combined_wcookie" AND status = 200 AND (file=cart.do OR file=success.do) | stats count as Transactions by file | rename file as Function
+
+            distinct_count: distinct count. or Use simply dc
+              e.g. | status distinct_count(product_name)
+              e.g. index = main sourcetype="access_combined_wcookie"  | stats dc(JSESSIONID) as logins by clientip | sort -logins
+
+            sum: e.g. | sum(price) as "gross sales" by product_name
+              e.g. | stats count as "units sold" sum(price) as "gross sales" by product_name
+              e.g. index=main sourcetype="access_combined_wcookie" AND status=200 | stats sum(bytes) as TotalBytes by file  | sort TotalBytes
+
+            avg: e.g. | stats avg(sale_price) as "Average selling price" by product_name
+                 e.g. | stats count as "units sold" avg(price) as "average retail price" avg(sale_price) as "avg selling price" by product_name
+                 e.g. index=main sourcetype="db_audit" | stats avg(Duration) as "time to complete" by Command | sort -"time to complete"
+
+            list: list all field values for each
+                 e.g. | stats list(asset) as "company assets" by employee
+            values: like list but only returns unique value.
+            WC-SH-G04
+            87.194.216.51
+            api
+            100
+
+
+E.g. queries:
+              sourcetype="access_combined_wcookie" AND action=purchase AND status=200 AND file = success.do
+              | fields action JSESSIONID status
+              | table JSESSIONID
+              | rename JSESSIONID as UserSessions
+              | dedup UserSessions
+
+Functions:
+Arguments:
+Clauses:
+
+Command + \ -> Cause each pipe to a new line.
+
+Lookups:
+      index=main sourcetype="access_combined_wcookie" status=200 file = "success.do"
+      | lookup products_lookup productId as productId OUTPUT product_name as ProductName
+      | stats count by ProductName
