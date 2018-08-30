@@ -80,6 +80,9 @@ gv      - reselect block
 
 After selecting the text, try d to delete, or y to copy, or :s/match/replace/, or :center, or !sort, or...
 
+u -> undo
+CTRL + r -> redo
+
 -----------------------------------------
 Text folding:
 :set foldmethod=indent -> Nicely indents code blocks.
@@ -122,3 +125,23 @@ In normal mode: >> to indent the current line , or << to unindent.
 In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
 CSCOPE https://a0gustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
+
+c: Find functions calling this function
+d: Find functions called by this function
+e: Find this egrep pattern
+f: Find this file
+g: Find this definition
+i: Find files #including this file
+s: Find this C symbol
+t: Find this text string
+
+------ JUMPS -----
+`` -> goes to the same location on the line
+'' -> goes to the beginning of the line
+Ctrl + I ->
+Ctrl + O ->
+g; -> To move back in the list of your previous edit locations.
+g. -> To move forward in the list of your edit locations.
+
+
+:set paste -> to fix the weird Ctrl-v when pasting in VIM.
