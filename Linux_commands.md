@@ -1,0 +1,2 @@
+netstat -nlp
+netstat -tuplen
