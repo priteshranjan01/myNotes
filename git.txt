@@ -2,7 +2,7 @@ GIT Configuration:
     System level: git config --system
     user level: git config --global
     project level: git config
-    
+
     git config --global user.name "pritesh ranjan"
     git config --global user.email "priteshranjantrivedi@gmail.com"
     git config --list
@@ -12,16 +12,16 @@ GIT Configuration:
 Disable ssl verification:
     git config http.sslVerify "false"
     or
-    GIT_SSL_NO_VERIFY=true 
+    GIT_SSL_NO_VERIFY=true
 
 GIT Auto-Completion: Look on web, how to configure in linux. Already available in windows
 Initializing a repository:
-git init 
+git init
 git add  # Have to do this every time, before a commit
 git commint -m "first commit"  # Always write commit message in present tense
-git commit -a -m "Commits by taking a shortcutting git stage step. Don't use this"  
+git commit -a -m "Commits by taking a shortcutting git stage step. Don't use this"
 git status
-git log  
+git log
 git log -n 2  # returns the 2 latest commits
 git log --since=2016-01-10
 git log --until=2016-01-10
@@ -30,7 +30,7 @@ git log --grep="initial"
 
 head information in ./.git/HEAD which refers to ./.git/refs/heads/master
 View the changes in the working directory:
-git diff 
+git diff
 git diff filename
 git diff --color-words filename  # nice word by word diffs
 view the changes in the staging area:
@@ -38,18 +38,18 @@ git diff --staged   (--cached in versions earlier than v1.6, also available in n
 
 Deleting files:
 STEP_1> git rm filename.txt  # this will completely delete the file and add that to the staging area/index
-git 
+git
 STEP_2> git commit -m "i will find you and i will kill you"
 
 Moving and renaming files:
 git mv abc.txt def.txt
-git commit -m "good luck"  # NOTE: if you delete/move the file directly using OS, then stage them yourself. 
+git commit -m "good luck"  # NOTE: if you delete/move the file directly using OS, then stage them yourself.
 
 Undoing working directory changes:
 git checkout -- filename or directoryname  # -- makes sure that you are checking out files and/or directories in THE CURRENT BRANCH. It's helpful when some filename and directoryname are same as a branch.
 
 Unstaging files:
-git reset HEAD filename  
+git reset HEAD filename
 
 Amending commits:
 Can only change the latest commit (for obvious reasons - because there are no other commits that refer to this).
@@ -59,7 +59,7 @@ Retrieving old versions:
 git checkout SHA_of_the_commit -- filename  # -- for current branch
 
 Reverting a commit:
-git revert revert SHA_of_the_commit_that_is_to_be_reverted  # This will automatically commit the change also. use -n (--no-commit) if you want to commit yourself. 
+git revert revert SHA_of_the_commit_that_is_to_be_reverted  # This will automatically commit the change also. use -n (--no-commit) if you want to commit yourself.
 REMEMBER : revert is good only when changes are simple. Use merge for complex changes.
 
 Using Reset to undo commits: (it's dangerous)
@@ -73,7 +73,7 @@ git reset --soft SHA_of_the_commit_to_which_you_want_to_reset
 git reset --mixed SHA_of_the_commit_to_which_you_want_to_reset
 git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
 
-Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed. 
+Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed.
 * git clean -f  # give -n option to see what all files will be deleted.
 
 Ignoring files in our project repository
@@ -84,35 +84,35 @@ Ignoring files in our project repository
 * negate expressions with !
     !index.php
 * # starts a comment
-log/*.log 
+log/*.log
 log/*.log.[0-9]
 ==> It's a good idea to ignore these type of files: Compiled source code, Zipped Files, Logs and DB files, OS generated files, user-uploaded assets
 
 Ignoring files globally
 git config --global core.excludesfile ~/.gitignore_global
 
-Ignoring tracked files: 
+Ignoring tracked files:
 $> git rm --cached filename
 $> git commit -m ""
 
-Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention. 
+Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention.
 If you are a narcissist, then name it after yourself.
 
 Navigating the commit tree
-* parent commit 
+* parent commit
     (HEAD^) or (SHA_of_the_commit^) OR (master^) OR (HEAD~) OR (HEAD~1)
 *grandparent commit
     (HEAD^^) or (SHA_of_the_commit^^) OR (master^^) OR (HEAD~2)
 * great-grandparent commit
     (HEAD^^^) or (SHA_of_the_commit^^^) OR (master^^^) or (HEAD~3)
 
-exploring tree listings : 
-$> git ls-tree HEAD  # google for further information 
+exploring tree listings :
+$> git ls-tree HEAD  # google for further information
 
-Getting more info from the commit log: 
+Getting more info from the commit log:
 $> git log --oneline
 $> git log --oneline -4
-$> git log -p 
+$> git log -p
 $> git log -p filename
 $> git log filename
 $> git log --stat --summary
@@ -124,15 +124,15 @@ $> git log -n 4 --format=full
 $> git log -n 4 --format=fuller
 $> git log --oneline --graph --all --decorate
 
-Viewing commits: 
+Viewing commits:
 $> git show SHA_of_the_commit
 $> git show --oneline HEAD
 $> git show --oneline HEAD~3  #Show the third last commit
 
-Comparing commits: 
+Comparing commits:
 $> git diff SHA_of_the_commit_with_which_current_working_directory_state_is_to_compared
 $> git diff SHA filename
-$> git log SHA_of_the_first_commit SHA_of_the_second_commit 
+$> git log SHA_of_the_first_commit SHA_of_the_second_commit
 $> git diff --ignore-space_change SHA_of_the_first_commit..HEAD  # or use -b instead of '--ignore-space_change'
 --ignore-all-space or just -w
 
@@ -145,26 +145,26 @@ $> git branch -a  # lists all the branches
 $> git branch -m modified_branch_name   # Renames the branch you have currently checked out
 $> git branch -m old_name new_name     # Renames an branch's name from old_name to new_name
 $> git checkout new_branch  # switch to new_branch
-$> git checkout new_branch_name -b  # Create a new branch,  check that out and switch to it 
+$> git checkout new_branch_name -b  # Create a new branch,  check that out and switch to it
 
-Comparing branching: 
+Comparing branching:
 $> git diff branch_1..branch_2  # the order of names doesn't matter
 $> git branch --merged  # Tells which branch has all the commits. # Google for more info
 
-Renaming branches: 
+Renaming branches:
 $> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
 
-Deleting branches: 
-$> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail. 
+Deleting branches:
+$> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail.
 $> git branch -D name_of_branch  # This is not a request, it's an order. Delete this branch. Non-merged changes will be lost.
 
-Configuring the command prompt to show the branch:  Google about this 
+Configuring the command prompt to show the branch:  Google about this
 
 Merging Code:
 -->> The first step is that we want to make sure that we checkout the branch that things are being merged into, the receiver.
 $> git checkout master
 $> git merge new_branch
-$> git merge --no-ff branch_name  # Don't merge the branches silently, make a commit and let it show in git logs 
+$> git merge --no-ff branch_name  # Don't merge the branches silently, make a commit and let it show in git logs
 $> git merge --ff-only branch_name  # DO merging only if you can do a fast- forward merge
 
 Resolving conflicts: The thing that gives me a migraine
@@ -173,10 +173,10 @@ These are your options:
 2) Resolve the conflicts manually (Sorry to say, but this is what I do most of the time), stage the changes and commit
 3) Use a merge tool: Google about this
 
-Stashing Changes: 
+Stashing Changes:
 $> git stash save   "a message to remind you of the changes"
 $> git stash list  # lists all the stash list
-$> git stash show stash@{0}  # show the stash number 0 
+$> git stash show stash@{0}  # show the stash number 0
 $> git stash show -p stash@{1}  # Show the stash number 1 in diff (patch) style
 $> git stash apply stash@{0}  # Merges the changes the stash in the current branch. NOTE: You can move the stash of one branch to another. CAUTION: This can lead to conflicts and hence headaches.
 $> git stash pop stash@{0}  # merges the changes and makes the changes into the working directory also
@@ -186,12 +186,12 @@ $> git stash clear  # Drops all of the stashes
 Remote branches:
 $> git remote  # lists all the remote branches that is known to this repository
 $> git remote add origin https://github.com/priteshranjan01/myNotes.git
-$> git remote -v 
+$> git remote -v
 $> git remote rm alias_of_the_remote_repository  # eg. of alias is 'origin'
  Creating a remote branch:
  $> git push -u origin master
  View the contents of .git/config
- 
+
 STACKOVERFLOW :  How do I update a GitHub forked repository? http://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository
 git remote add upstream https://github.com/whoever/whatever.git
 git checkout master
@@ -211,26 +211,26 @@ $> git remote -v  # verify that push and pull repositories are different
  NOTE: if you want to checkout a particular branch, give '-b' option with 'git clone'
  Tracking remote branches: Google it, I am in a hurry.
  Pushing a non-tracking branch: $> git push origin non_tracking_branch
- 
+
  Pushing changes to the remote repository:
  $> git push  # pushes to the default branches that is being tracked
- 
+
  Fetching changes from a remote repository:
  $> git fetch origin  # Fetch doesn't do any harm, so do as many times as you wish
- GOLDEN TIPS : 
+ GOLDEN TIPS :
  -- Start your day with a git fetch
  -- fetch before you push
  -- fetch often
  NOTE: origin/master is just like any other branch except that we can not check that branch out
  $> git pull  # It does git fetch and then git merge in one step. Well, i would still like to fetch and then merge myself. But anyway thanks, git pull
- 
+
  Pushing to an updated remote branch: well fetch, merge in local repo and push
- Deleting a remote branch: 
+ Deleting a remote branch:
  $> git push origin :branch_to_be_deleted
- or 
+ or
  $> git push origin --delete non_tracking
- 
- Setting up aliases: 
+
+ Setting up aliases:
  $> git config --global alias.logp "log --oneline --decorate --graph"
  $> git config --get-regexp alias  # to list all the aliases
 
@@ -238,7 +238,7 @@ http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typin
 git config --global credential.helper "cache --timeout=36000"
 This command makes the git client cache the password for 36000 seconds.
 
-View git diff in vimdiff 
+View git diff in vimdiff
 git config --global diff.tool vimdiff
 git config --global difftool.prompt false
 git config --global alias.d difftool
@@ -246,4 +246,11 @@ git config --global alias.d difftool
 
 Git Squash the commits into one  http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 > git rebase -i HEAD~3
+https://stackoverflow.com/questions/134882/undoing-a-git-rebase
 
+Something gone bad? Try git reflog.  http://effectif.com/git/recovering-lost-git-commits
+
+
+# Git subtrees: https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree
+https://medium.com/@v/git-subtrees-a-tutorial-6ff568381844
+https://github.com/apenwarr/git-subtree/blob/master/git-subtree.txt

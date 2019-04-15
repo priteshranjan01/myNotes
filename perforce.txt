@@ -45,6 +45,11 @@ Creating numbered changelist:
 $ p4 change # Will open a changelist form to enter the description.
 $ p4 submit -c <changelist_number>
 
+Create a Bug on OneBug. Note the bug number.
+$ p4 fix -s FIXED -c <changelist_number> <OneBug number only the numerals>
+Then submit
+$ p4 submit -c <changelist_number>
+
 To remove files from the changelist and discard any changes:
 $ p4 revert -c <changelist_number>
 
@@ -64,12 +69,28 @@ $ p4 shelve
 $ p4 unshelve -s 123 -c 124 <filename>
 # Submit the changelist to the server.
 $ p4 submit -c 124
-
+# Shelve a changelist (when you want to switch task.)
+$ p4 shelve -c changelist_number
 # Discard the shelved files:
-$ p4 shelve -d -c 124.
+$ p4 shelve -d -c 124
+# Afterward delete the changelist itself.
+# Update files in a shelved changelist. Can be done on the same client.
+$ p4 shelve -r -c 708774
+# On the other workspace, issue this to load the changes.
+$ p4 unshelve -s 708774
+# Now there would be reolve conflicts. Better approach is to revert the changes
+from outdated changelist and load the current changelist.
+
+# Submit a changelist with shelved files: https://stackoverflow.com/questions/15877984/fastest-way-of-submitting-shelved-changelist
+p4 shelve -c #changelist -d
+p4 submit -c #changelist
+
+Perfoce LOL: The first step gives the scary response "Shelved change 111111 deleted." Don't worry, the changelist still exists, and the files are still in it. It's just no longer "shelved"
 
 TIP: Always move the shelved files into a new pending changelist before
 submitting that changelist.
+Delete a pending changelist:
+$> p4 change -d changenum
 
 Displaying information about changelists
 $> p4 changes -m <count>
@@ -91,3 +112,19 @@ $> p4 unlock -c <changelist_number> -f <filename>
 
 To invoke "p4 edit" on the current opened file
 :!p4 edit %
+
+To integrate between branches
+1. p4 integrate -o /<from depot>…@<Change list number>,@<change list number> <to depot>...
+EXAMPLE: p4 integrate -o //depot/main/rs_121_NGS/usr.src/...@722356,@722356 //depot/main/TOT/usr.src/...
+2. P4 resolve…
+3. P4 change (put all opened files in default change list to a new changelist)
+4. P4 submit <change list number>
+
+
+To rename files:
+
+$> p4 rename file_old_name file_new_name
+
+
+Assuming that you have a changelist in perforce now and would like to post a review. Here is the command to do it:
+rbt post --debug --disable-ssl-verification --server https://reviewboard.citrite.net/ --username priteshr --password Madhav@123 --p4-port sjcpperforce04.citrite.net:1666 --p4-client "prit_mac" 739773

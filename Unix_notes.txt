@@ -148,3 +148,6 @@ Output formats
 -q only whether files differ
 
 xargs: build and execute command lines from standard input
+
+
+tail -f file | grep --line-buffered my_pattern

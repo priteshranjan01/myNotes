@@ -115,6 +115,21 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 
 Sometimes vimdiff screws up the color scheme. The best way to fix it is to enter
 :highlight while inside vim. Then copy the values of the combination which looks good.
+----  highlight trailing whitespaces.
+If your goal is to:
+    highlight trailing whitespace in red
+    have this highlighting not appear whilst you are typing in insert mode
+    have the highlighting of whitespace apply when you open new buffers
+then the following 6 commands are what you should put into your .vimrc.
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+
 -----------------------------------------
 Nice read for refreshing VIM tricks:
 https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
@@ -134,7 +149,7 @@ g: Find this definition
 i: Find files #including this file
 s: Find this C symbol
 t: Find this text string
-
+:
 ------ JUMPS -----
 `` -> goes to the same location on the line
 '' -> goes to the beginning of the line
@@ -145,3 +160,11 @@ g. -> To move forward in the list of your edit locations.
 
 
 :set paste -> to fix the weird Ctrl-v when pasting in VIM.
+
+Set wrap in vimdiff mode:
+au VimEnter * if &diff | execute 'windo set wrap' | endif
+
+:j! remove all clrf in vim
+:j replace all clrf in vim with space
+
+:set mouse=a  # Enable mouse support where the underlying system supports it.

@@ -1,4 +1,4 @@
-# python 2.7 
+# python 2.7
 
 - [Top 10 common mistakes](https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make)
 - [Good python questions](https://www.toptal.com/python#hiring-guide)
@@ -37,9 +37,9 @@
  textwrap.fill()
  textwrap.wrap()
 ```
-- `print ("{0:o}, {0:X}, {0:b}, {0:d}".format(34))` # output: `42, 22, 100010, 34` # prints 34 in octal, hex, binary, and decimal 
+- `print ("{0:o}, {0:X}, {0:b}, {0:d}".format(34))` # output: `42, 22, 100010, 34` # prints 34 in octal, hex, binary, and decimal
 
-- builtins => `chr`, `ord`  # do help(chr) 
+- builtins => `chr`, `ord`  # do help(chr)
 
 - **NOTE**: `'Hello   World  Lol'.split(' ')` vs `'Hello   World  Lol'.split()` # there is a difference, the first one creates extra blank elements also from the spaces between words
 
@@ -50,7 +50,7 @@
 - `itertools.groupby` [itertools.groupby](https://docs.python.org/2/library/itertools.html#itertools.groupby)
 
 - `collections.Counter` [collections.counter](https://pymotw.com/2/collections/counter.html)
-- `collections.defaultdict` 
+- `collections.defaultdict`
 - `collections.namedtuple`
 - `collections.OrderedDict`
 - `collections.deque()`
@@ -108,7 +108,7 @@ Sometimes you're not only interested in what the text between delimiters is, but
 >"With lookarounds, your feet stay planted on the string. You're just looking, not moving!"
 
 | Lookaround | Name | What it Does |
-|---    | --- | --- 
+|---    | --- | ---
 |`(?=foo)`	 |   Lookahead | Asserts that what immediately follows the current position in the string is foo
 |`(?<=foo)` | Lookbehind	| Asserts that what immediately precedes the current position in the string is foo
 |`(?!foo)`	| Negative Lookahead | Asserts that what immediately follows the current position in the string is not foo
@@ -119,7 +119,7 @@ Super class method call syntax:
 3.X: super().method_of_parent()
 
 Python 3 cool features:
-`bit_length`, 
+`bit_length`,
 Extended Unpacking: https://www.python.org/dev/peps/pep-3132/
 ```
 import textwrap as tw
@@ -127,3 +127,22 @@ feedback = "This is an example feedback"
 tw.fill(feedback, 8)  # Returns-> 'This is\nan\nexample\nfeedback'
 tw.wrap(feedback, 8)  # Returns-> ['This is', 'an', 'example', 'feedback']
 ```
+
+
+Print all the command history in interactive mode.
+import readline
+for i in range(readline.get_current_history_length()):
+  print(readline.get_history_item(i))
+
+
+Python time conversion format specifiers:
+Thu %a
+Thursday %A
+Nov %b
+November %B
+2019 %Y
+19 %y  # Year 2019
+GMT  %Z
+PM %p
+07:31:39 %X
+7 %d  # 7th day of the month
