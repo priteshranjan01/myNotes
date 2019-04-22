@@ -4,7 +4,7 @@ GIT Configuration:
     project level: git config
 
     git config --global user.name "pritesh ranjan"
-    git config --global user.email "priteshranjantrivedi@gmail.com"
+    git config --global user.email "pritesh.ranjan.trivedi@gmail.com"
     git config --list
     git config user.email
     git config --global core.editor "vim"
@@ -75,6 +75,8 @@ git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
 
 Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed.
 * git clean -f  # give -n option to see what all files will be deleted.
+Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed. 
+* git clean -f  -d # give -n option to see what all files will be deleted. -d to remove directories also
 
 Ignoring files in our project repository
 .gitignore
@@ -149,7 +151,9 @@ $> git checkout new_branch_name -b  # Create a new branch,  check that out and s
 
 Comparing branching:
 $> git diff branch_1..branch_2  # the order of names doesn't matter
-$> git branch --merged  # Tells which branch has all the commits. # Google for more info
+$> git branch --merged  # Prints all the branches whose all the commits are in the current branch. (i.e. those branches have been merged in the current branch) 
+$> git branch --no-merged # The branches that have not been merged in the current branch.
+$> git branch -r --merged # 
 
 Renaming branches:
 $> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
@@ -229,8 +233,12 @@ $> git remote -v  # verify that push and pull repositories are different
  $> git push origin :branch_to_be_deleted
  or
  $> git push origin --delete non_tracking
+ or
+ $> git push -d origin non_tracking
 
  Setting up aliases:
+ 
+ Setting up aliases: 
  $> git config --global alias.logp "log --oneline --decorate --graph"
  $> git config --get-regexp alias  # to list all the aliases
 
@@ -254,3 +262,39 @@ Something gone bad? Try git reflog.  http://effectif.com/git/recovering-lost-git
 # Git subtrees: https://www.atlassian.com/blog/git/alternatives-to-git-submodule-git-subtree
 https://medium.com/@v/git-subtrees-a-tutorial-6ff568381844
 https://github.com/apenwarr/git-subtree/blob/master/git-subtree.txt
+
+Lynda.com intermediate Git.
+ Prune stale branch.
+$> git remote prune origin --dry-run
+$> git remote prune origin 
+$> git fetch --prune 
+
+# Git Tags. Think of a tag as a "commit with a name".
+Lightweight tag.
+$> git tag tag_name commit_sha
+Annotated tag. USE THIS.
+$> git tag -a tag_name -m "Message for the tag" commit_sha
+Default commit_sha is HEAD
+
+$> git tag --list # List the tags. (-l) is the shortform.
+$> git tag -l -n # -n to display annotatations also.
+$> git tag -l <search_string> # Can use the wildcard *
+$> git show <tag_number>
+$> git diff <tag_name> <tag_name1>
+$> git tag -d <tag_name>
+# Git fetch automatically fetches tags from remote repo but git push 
+# doesn't automatically push tags to remote remotely.
+$> git push origin <tag_name>
+$> git push origin --tags # push all tags.
+$> git push origin :tag_name
+
+# Git interactive staging. 
+$> git add -i # Enter the interactive mode.
+# the available commands: Hit ENTER to get out of a mode.
+- update : Add the whole file.
+- revert : Unstage the staged changes.
+- add tracked: Show the list of untracked files.
+- diff: Show diffs.
+# Patch mode: Stage a part of the file instead of the whole file.
+# Hunk: an area where two files differ.
+$> git add -p # to go directly in patch mode.

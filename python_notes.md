@@ -27,6 +27,7 @@
 - `set >= otherSet` To check for superset
 
 - [Stackoverflow: Sort a list by multiple attributes?](http://stackoverflow.com/questions/4233476/sort-a-list-by-multiple-attributes)
+- Sorting in general https://docs.python.org/2/howto/sorting.html
 
 - `''.ljust()`, `''.rjust()`, `''.center()`
 - `'BANANA FRIES 12'.rpartition(' ')`  --> `('BANANA FRIES', ' ', '12')`
@@ -92,7 +93,8 @@ m.group(); m.groups(); m.start(); m.end(); m.span();
 
 ```
 """
-Sometimes you're not only interested in what the text between delimiters is, but also need to know what the delimiter was. If capturing parentheses are used in the RE, then their values are also returned as part of the list. Compare the following calls:
+Sometimes you're not only interested in what the text between delimiters is, but also need to know what the delimiter was. 
+If capturing parentheses are used in the RE, then their values are also returned as part of the list. Compare the following calls:
 """
 
 >>> p = re.compile(r'\W+')
@@ -118,6 +120,7 @@ Super class method call syntax:
 2.7: super(childClass, self).method_of_parent()
 3.X: super().method_of_parent()
 
+<<<<<<< HEAD
 Python 3 cool features:
 `bit_length`,
 Extended Unpacking: https://www.python.org/dev/peps/pep-3132/
@@ -146,3 +149,4 @@ GMT  %Z
 PM %p
 07:31:39 %X
 7 %d  # 7th day of the month
+----------- Sorting ---------

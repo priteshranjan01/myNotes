@@ -1,3 +1,5 @@
+-------------------------- PDB python debugger ----------------------------
+
 Starting the Debugger
 	From the Command Line		python -m pdb pdb_script.py
 	Within the Interpreter		import pdb; pdb.run(pdb_script.py)
@@ -40,3 +42,50 @@ Ignoring Breakpoints
 
 Triggering Actions on a Breakpoint
 	commands breakpoint_number
+	
+-------------------------- GDB ----------------------------
+http://beej.us/guide/bggdb/#misc
+
+Compile: with -g option to create symbolic debugging information.
+cc -g -o foo foo.c  # Generate core dump file name 'foo'
+Start: $ gdb prog_executable
+Start GDB in GUI mode: $ gdb -tui prog_executable
+gdb -tui -c core foo  # Attach to the core dump file.
+
+----- Window Commands
+info win	Shows current window info
+focus winname	Set focus to a particular window bby name ("SRC", "CMD", "ASM", or "REG") or by position ("next" or "prev")
+fs	Alias for focus
+layout type	Set the window layout ("src", "asm", "split", or "reg")
+tui reg type	Set the register window layout ("general", "float", "system", or "next")
+winheight val	Set the window height (either an absolute value, or a relative value prefaced with "+" or "-")
+wh	Alias for winheight
+set disassembly-flavor flavor	Set the look-and-feel of the disassembly. On Intel machines, valid flavors are intel and att
+----
+
+Providing command line args: give (gdb) run  arg1 argv2
+
+break main:	    ==Break at the beginning of the main() function
+break 5         ==Break at line 5 of the current file
+break hello.c:5	==Break at line 5 of hello.c
+i b (info breakpoints)
+enable <breakpoint_number>
+disable <breakpoint_number>
+delete <breakpoint_number>  
+
+# Display a variable in scope every time.
+display <variable_name>
+info display
+print <variable_nam> # For one time display.
+
+bt (backtrace)  # For stack manipulation. 
+finish  # Exit the current function and return to the calling function
+stepi   # Execute a single assembly instruction.
+advance # Continue to a specific code location. "advance is just shorthand for "continue to this temporary breakpoint.""
+jump    # Jump to an arbitrary section of code.
+set (variable_name = new_value)    # Set a variable dynamically.
+watch variable_name  # Hardware watchpoint. Print the value when it changes.
+info watch  # Display all the variable under watch.
+rwatch to detect when a variable is read
+awatch to detect when a variable is either read or written
+

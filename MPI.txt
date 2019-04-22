@@ -33,3 +33,4 @@ int MPI_Test (MPI_Request *request, int *flag, MPI_Status *status);
 
 
 printf("\n%d %d %d %d %d",MPI_SUCCESS, MPI_ERR_COMM, MPI_ERR_COUNT, MPI_ERR_TYPE, MPI_ERR_BUFFER); = 0 5 2 3 1
+MPI_ERR_ARG = 12, MPI_ERR_RANK = 6
