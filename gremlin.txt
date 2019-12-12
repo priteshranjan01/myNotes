@@ -1,0 +1,84 @@
+Source: https://kelvinlawrence.net/book/Gremlin-Graph-Guide.html
+
+3. Writing gremlin queries:
+- Create a graph traversal source object
+g = graph.traversal()
+
+- Looking at all the vertices in the graph:
+g.V()
+- Looking at all the edges in the graph:
+g.E()
+- Find the vertices that are airports.
+g.V().hasLabel('airports')
+- Find the vertex which has code 'DFW'
+g.V().has('code', 'DFW')
+- Combine the above two.
+g.V().hasLabel('airport').has('code','DFW')
+or
+g.V().has('airport', 'code', 'DFW')
+
+- Retrieving property values from a vertex:
+g.V().hasLabel('airport').has('code', 'DFW').values()
+
+- Return a specific property's value:
+g.V().hasLabel('airport').has('code', 'DFW').values('runways','icao')
+
+// Find all the vertices that do not have a 'region' property
+g.V().hasNot('region')
+
+// How many airports are there in the graph?
+g.V().hasLabel('airport').count()
+
+// How many of each type of vertex are there?
+g.V().groupCount().by(label)
+g.V().label().groupCount()
+
+// As above but using group()
+g.V().group().by(label).by(count())
+
+Graph Traversal:
+out *     -> Outgoing adjacent vertices.
+in  *     -> Incoming adjacent vertices.
+both *    -> Both incoming and outgoing adjacent vertices.
+outE  *  -> Outgoing incident edges.
+inE    * -> Incoming incident edges.
+bothE  * -> Both outgoing and incoming incident edges.
+outV   -> Outgoing vertex.
+inV     -> Incoming vertex.
+otherV  -> The vertex that was not the vertex we came from.
+Note that the steps labelled with an * can optionally take the name of one or more edge labels as a parameter. If omitted, all relevant edges will be traversed.
+
+
+// Where can I fly to from Austin?
+g.V().has('airport','code','AUS').out('route').values('code').fold()
+
+// Where can I fly to from Austin, with one stop on the way?
+g.V().has('airport','code','AUS').out('route').out('route').values('code')
+
+// What routes come in to LCY?
+g.V().has('airport','code','LCY').in('route').values('code')
+
+// Flights from London Heathrow (LHR) to airports in the USA
+g.V().has('code','LHR').out('route').has('country','US').values('code')
+
+A modulator is a step that influences the behavior of the step that it is associated with. Examples of such modulator steps are by and as.
+The by modulator steps are processed in a round robin fashion in cases where there are more results to apply them to than by modulators specified.
+E.g.
+g.V().has('airport','code','LCY').outE().inV().
+      path().by('code').by('dist')
+OUTPUT:      [LCY,456,GVA]
+
+Traversals that do not start with a V or E step are referred to as "anonymous traversals".
+
+labelling the parts of the traversal that we care about using as steps and then using from and to modulators to tell the path step what we are interested in. Take a look at the modified version of the query below.
+g.V().has('airport','code','AUS').out().as('a').out().as('b').
+      path().by('code').from('a').to('b').limit(10)
+
+Dedup - remove the duplicate entries:
+g.V().has('airport','code','AUS').as('a').out().out().as('b').out().
+      path().by('code').to('b').limit(10).dedup()
+
+[AUS,EWR,YYZ]
+
+hasNext(): Does an edge exist between two vertices?
+g.V().has('code','AUS').out('route').has('code','DFW').hasNext()
