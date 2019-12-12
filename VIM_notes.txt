@@ -108,6 +108,8 @@ set number
 set relativenumber
 set autoindent
 
+set autoindent noexpandtab tabstop=4 shiftwidth=4  -> Set tab to tab. Don't replace with spaces.
+
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red

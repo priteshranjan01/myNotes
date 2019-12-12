@@ -93,7 +93,7 @@ m.group(); m.groups(); m.start(); m.end(); m.span();
 
 ```
 """
-Sometimes you're not only interested in what the text between delimiters is, but also need to know what the delimiter was. 
+Sometimes you're not only interested in what the text between delimiters is, but also need to know what the delimiter was.
 If capturing parentheses are used in the RE, then their values are also returned as part of the list. Compare the following calls:
 """
 
@@ -120,7 +120,6 @@ Super class method call syntax:
 2.7: super(childClass, self).method_of_parent()
 3.X: super().method_of_parent()
 
-<<<<<<< HEAD
 Python 3 cool features:
 `bit_length`,
 Extended Unpacking: https://www.python.org/dev/peps/pep-3132/
@@ -150,3 +149,29 @@ PM %p
 07:31:39 %X
 7 %d  # 7th day of the month
 ----------- Sorting ---------
+
+-----------Design Patterns - Lynda.com -----------------------------------------
+Three types:
+Creational: Create objects in a systematic way. Think - Polymorphism.
+Structural: Used to establish useful relationships between software components in certain configurations. Think - Inheritence
+Behavioral: Best practice of object interaction. Think - Mehods and their signature.
+
+++ Creational:
+1. Factory: E.g. Have a get_pet method which expects pet_type as argument and return the relevant object.
+2. Abstract factory:
+3. Singleton: Example: A cache. One implementation is Borg design pattern.  
+4. Builder:
+5. Prototype:
+
+++ structural:
+1. Decorator:
+2. Proxy: Postpone object creation untill absolutely necessary.
+3. Adapter:
+4. Composite:
+5. Bridge:
+6. Facade:
+
+++ behavioral:
+1. Observer:
+2. Visitor:
+3. Iterator:

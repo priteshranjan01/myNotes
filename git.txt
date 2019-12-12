@@ -18,6 +18,7 @@ GIT Auto-Completion: Look on web, how to configure in linux. Already available i
 Initializing a repository:
 git init
 git add  # Have to do this every time, before a commit
+git add -u # Add only modified and deleted files. Ignore untracked files.
 git commint -m "first commit"  # Always write commit message in present tense
 git commit -a -m "Commits by taking a shortcutting git stage step. Don't use this"
 git status
@@ -246,6 +247,10 @@ http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typin
 git config --global credential.helper "cache --timeout=36000"
 This command makes the git client cache the password for 36000 seconds.
 
+Flush the cached password when something changed at server.
+https://stackoverflow.com/a/15382950/4608878
+git config --global --unset credential.helper
+
 View git diff in vimdiff
 git config --global diff.tool vimdiff
 git config --global difftool.prompt false
@@ -298,3 +303,6 @@ $> git add -i # Enter the interactive mode.
 # Patch mode: Stage a part of the file instead of the whole file.
 # Hunk: an area where two files differ.
 $> git add -p # to go directly in patch mode.
+
+git subtree push --prefix=<subdirectory_to_push> <Remote_name> <branch_name_on_the_target_repository>
+git subtree push --prefix=ngs_sdk csvc_ngs_sdk update_from_ngs_automation
