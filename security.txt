@@ -1,0 +1,27 @@
+Creating a application security threat model.
+
+1. What guarantees would you like to give your customers regarding the application's security, and what expectations will they have?
+2. In what environment do you expect the application to be used?
+3. How do you expect the features of the application to be used?
+
+Model step:
+  Document application-relevant security concerns. From these models understand specific threats that the application must defend against.
+  Develop diagrams (eg. Data Flow Diagrams) which portray significant components of the application from a security perspective.
+  Draw 1. Processes 2. Data Flows 3. Data Stores 4. External Entity 5. Trust Boundaries
+
+  S - Spoofing
+  T - Tampering
+  R - Repudiation
+  I - Information Disclosure
+  D - Denial of Service
+  E - Elevation of privilege.
+
+After identifying the threats, determine the necessary conditions that would turn them into successful attacks. Threat trees is very successful in this.
+
+Identify applicable standard thread mitigations.
+Spoofing - Authentication, PKI, TLS, IPSec, MACs, Digital signatures, Hashes.
+Tampering Identity - ACLs, MACs, Digital signatures.
+Repudiation - Strong authentication, security logging and auditing.
+Information disclosure and confidentiality: Encryption, ACLs
+Denial of service - ACLs, Filtering, Quotas, Authorization, High Availability design
+Elevation of privilege - Authorization - ACLs, privilege ownership, permissions, input validation.
