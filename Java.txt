@@ -1,3 +1,11 @@
+byte, char, short, int, long, float, double, boolean
+
+
+instanceof
+result = condition ? value1 : value2;
+When using the instanceof operator, keep in mind that null is not an instance of anything.
+
+
 Strings:
 .length()
 .toUpperCase()
@@ -5,5 +13,35 @@ Strings:
 .indexOf()
 .concat("suffix")
 
+>>>
 Array:
 int[][] myNumbers = { {1, 2, 3, 4}, {5, 6, 7} };
+
+public static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)
+>>>
+You can override a method and define it to return a subclass of the original method, like this:
+public ImaginaryNumber returnANumber() {
+    ...
+}
+
+This technique, called covariant return type, means that the return type is allowed to vary in the same direction as the subclass.
+
+>>>
+Explicit constructor invocation: From within a constructor, you can also use the this keyword to call another constructor in the same class. Doing so is called an explicit constructor invocation.
+>>>
+Warning: Don't serialize inner class objects.
+>>>
+Using Math.random works well when you need to generate a single random number. If you need to generate a series of random numbers, you should create an instance of java.util.Random and invoke methods on that object to generate numbers.
+
+>>>
+Questions:
+1. What is a class literal?
+2. Signed right shift (>>) vs unsigned right shift (>>>).
+3. Why is "main" method declared static?
+4. Java initializer blocks example.
+5. synthetic constructs:
+6. Captured Variable.
+7. Target type.
+8. Local class vs Nested class.
+9. Java Annotations
+10. Functional interface.

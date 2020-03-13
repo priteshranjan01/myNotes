@@ -76,7 +76,7 @@ git reset --hard SHA_of_the_commit_to_which_you_want_to_reset
 
 Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed.
 * git clean -f  # give -n option to see what all files will be deleted.
-Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed. 
+Removing untracked files: (other than just deleting them directly from OS.) NOTE: On windows, it wouldn't even go in recycle bin. It will be totally trashed.
 * git clean -f  -d # give -n option to see what all files will be deleted. -d to remove directories also
 
 Ignoring files in our project repository
@@ -152,9 +152,9 @@ $> git checkout new_branch_name -b  # Create a new branch,  check that out and s
 
 Comparing branching:
 $> git diff branch_1..branch_2  # the order of names doesn't matter
-$> git branch --merged  # Prints all the branches whose all the commits are in the current branch. (i.e. those branches have been merged in the current branch) 
+$> git branch --merged  # Prints all the branches whose all the commits are in the current branch. (i.e. those branches have been merged in the current branch)
 $> git branch --no-merged # The branches that have not been merged in the current branch.
-$> git branch -r --merged # 
+$> git branch -r --merged #
 
 Renaming branches:
 $> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
@@ -238,8 +238,8 @@ $> git remote -v  # verify that push and pull repositories are different
  $> git push -d origin non_tracking
 
  Setting up aliases:
- 
- Setting up aliases: 
+
+ Setting up aliases:
  $> git config --global alias.logp "log --oneline --decorate --graph"
  $> git config --get-regexp alias  # to list all the aliases
 
@@ -271,8 +271,8 @@ https://github.com/apenwarr/git-subtree/blob/master/git-subtree.txt
 Lynda.com intermediate Git.
  Prune stale branch.
 $> git remote prune origin --dry-run
-$> git remote prune origin 
-$> git fetch --prune 
+$> git remote prune origin
+$> git fetch --prune
 
 # Git Tags. Think of a tag as a "commit with a name".
 Lightweight tag.
@@ -287,13 +287,13 @@ $> git tag -l <search_string> # Can use the wildcard *
 $> git show <tag_number>
 $> git diff <tag_name> <tag_name1>
 $> git tag -d <tag_name>
-# Git fetch automatically fetches tags from remote repo but git push 
+# Git fetch automatically fetches tags from remote repo but git push
 # doesn't automatically push tags to remote remotely.
 $> git push origin <tag_name>
 $> git push origin --tags # push all tags.
 $> git push origin :tag_name
 
-# Git interactive staging. 
+# Git interactive staging.
 $> git add -i # Enter the interactive mode.
 # the available commands: Hit ENTER to get out of a mode.
 - update : Add the whole file.
