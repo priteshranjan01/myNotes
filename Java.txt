@@ -5,6 +5,8 @@ instanceof
 result = condition ? value1 : value2;
 When using the instanceof operator, keep in mind that null is not an instance of anything.
 
+Python `", ".join([str(i) for i in myList])` equivalent in java
+String joined = myList.stream().map(e -> e.toString()).collect(Collectors.joining(", "));
 
 Strings:
 .length()
@@ -45,3 +47,76 @@ Questions:
 8. Local class vs Nested class.
 9. Java Annotations
 10. Functional interface.
+11. Bounded type parameter.
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> COLLECTIONS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Interface - Implementation - Algorithms
+
+
+Interface Hierarchy: -----------------------------------------
+
+                    |------>Set-------> SortedSet
+Collection -------->|------>List
+                    |------>Queue
+                    |------>Deque
+
+Map  ------>  SortedMap
+--------------------------------------------------------------
+Collections:
+The Collection interface contains methods that perform basic operations, such as int size(), boolean isEmpty(), boolean contains(Object element), boolean add(E element), boolean remove(Object element), and Iterator<E> iterator().
+
+It also contains methods that operate on entire collections, such as boolean containsAll(Collection<?> c), boolean addAll(Collection<? extends E> c), boolean removeAll(Collection<?> c), boolean retainAll(Collection<?> c), and void clear().
+
+Additional methods for array operations (such as Object[] toArray() and <T> T[] toArray(T[] a) exist as well.
+In JDK 8 and later, the Collection interface also exposes methods Stream<E> stream() and Stream<E> parallelStream(), for obtaining sequential or parallel streams from the underlying collection.
+
+Traversing Collections: There are three ways to traverse collections: (1) using aggregate operations (2) with the for-each construct and (3) by using Iterators.
+
+    containsAll — returns true if the target Collection contains all of the elements in the specified Collection.
+    addAll — adds all of the elements in the specified Collection to the target Collection.
+    removeAll — removes from the target Collection all of its elements that are also contained in the specified Collection.
+    retainAll — removes from the target Collection all its elements that are not also contained in the specified Collection. That is, it retains only those elements in the target Collection that are also contained in the specified Collection.
+    clear — removes all elements from the Collection.
+
+Set Interface:
+    Implementations: HashSet, TreeSet, LinkedHashSet (Orders elements based on the order they were inserted)
+
+    c.stream().collect(Collectors.toSet());
+
+
+----------------------------------------------------------------------------------
+FILE IO:
+
+Path p1 = Paths.get("/home/joe/foo");
+
+System.out.format("toString: %s%n", path.toString());
+System.out.format("getFileName: %s%n", path.getFileName());
+System.out.format("getName(0): %s%n", path.getName(0));
+System.out.format("getNameCount: %d%n", path.getNameCount());
+System.out.format("subpath(0,2): %s%n", path.subpath(0,2));
+System.out.format("getParent: %s%n", path.getParent());
+System.out.format("getRoot: %s%n", path.getRoot());
+
+Here is the output for both Windows and the Solaris OS:
+Method Invoked 	Returns in the Solaris OS 	Returns in Microsoft Windows 	Comment
+toString 	/home/joe/foo 	C:\home\joe\foo 	Returns the string representation of the Path. If the path was created using Filesystems.getDefault().getPath(String) or Paths.get (the latter is a convenience method for getPath), the method performs minor syntactic cleanup. For example, in a UNIX operating system, it will correct the input string //home/joe/foo to /home/joe/foo.
+getFileName 	foo 	foo 	Returns the file name or the last element of the sequence of name elements.
+getName(0) 	home 	home 	Returns the path element corresponding to the specified index. The 0th element is the path element closest to the root.
+getNameCount 	3 	3 	Returns the number of elements in the path.
+subpath(0,2) 	home/joe 	home\joe 	Returns the subsequence of the Path (not including a root element) as specified by the beginning and ending indexes.
+getParent 	/home/joe 	\home\joe 	Returns the path of the parent directory.
+getRoot 	/ 	C:\ 	Returns the root of the path.
+
+----------------------------------------------------------------------------------
+Setting up JUNIT::::::::::::::: https://www.tutorialspoint.com/junit/junit_environment_setup.htm
+
+Download junit and hamcrest jar from here https://github.com/junit-team/junit4/wiki/Download-and-Install
+Move them to a directory: /Users/pritesr/personal/java101 in this case.
+
+cd personal/java101/
+export JUNIT_HOME=/Users/pritesr/personal/java101
+export CLASSPATH=$CLASSPATH:/Users/pritesr/personal/java101/junit-4.13.jar:.
+export CLASSPATH=$CLASSPATH:/Users/pritesr/personal/java101/hamcrest-core-1.3.jar:.
+javac TestRunner.java TestJunit.java
+java TestRunner

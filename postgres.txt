@@ -1,0 +1,36 @@
+Onebox CSDD restart/start:
+
+/tmp/startCsd.sh
+
+Onebox manfred restart: Note: CSDD should already be running.
+pkill -9 postgres
+/tmp/startManfred.sh
+
+
+Connecting:
+psql -U rdsadmin -h 10.66.138.62
+
+Help
+# help
+
+Check version:
+
+rdsadmin=# select version();
+                                   version
+-----------------------------------------------------------------------------
+ PostgreSQL 10.6 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.9.3, 64-bit
+(1 row)
+
+Disconnecting:
+# \q
+
+
+\du or \du+ to list all the users.
+\l or \list: list all databases
+\c or \connect databaseName databaseName
+\dt: list all tables in the current database using your search_path
+\dt *.: list all tables in the current database regardless your search_path
+\dt *.* List tables in all schemas.
+\dt test.*  List tables in the schema named test. 
+\d tablename  : Describe table.
+\dn list all the schemas in a database.

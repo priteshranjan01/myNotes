@@ -1,5 +1,124 @@
-C++ casts:
+Compiling a cpp file:
+gcc hello.c   # For c files.
+g++ Foo.h Foo.cpp  # For cpp files.
+
+Compiler	Platform	Command
+GCC	Linux, among others...	    g++ -std=c++0x example.cpp -o example_program
+Clang	OS X, among others...	clang++ -std=c++11 -stdlib=libc++ example.cpp -o example_program
+
+
+int foo = 0;
+auto bar = foo;  // the same as: int bar = foo;
+
+int foo = 0;
+decltype(foo) bar;  // the same as: int bar;
+
+String:
+#include <string>
+
+string mystring = "This is a string";
+string mystring ("This is a string");
+string mystring {"This is a string"};
+
+75         // int
+75u        // unsigned int
+75l        // long
+75ul       // unsigned long
+75lu       // unsigned long
+
+
+3.14159    // 3.14159
+6.02e23    // 6.02 x 10^23
+1.6e-19    // 1.6 x 10^-19
+3.0        // 3.0
+
+#define PI 3.14159
+#define NEWLINE '\n'
+
+7 == 5+2 ? 4 : 3
+
+int main ()
+{
+  int i, a, b;
+  cout << "Please enter an integer value: ";
+  cin >> i;
+  cin >> a >> b;
+  cout << "The value you entered is " << i;
+  cout << " and its double is " << i*2 << ".\n";
+  string mystr;
+  cout << "What's your name? ";
+  getline (cin, mystr);
+
+  int bar [5] = { 10, 20, 30 };
+  int x = foo[2];
+  foo[0] = 99;
+  int jimmy [3][5];
+char myword[] = { 'H', 'e', 'l', 'l', 'o', '\0' };
+  return 0;
+
+  char myntcs[] = "some text";
+string mystring = myntcs;  // convert c-string to string
+cout << mystring;          // printed as a library string
+cout << mystring.c_str();  // printed as a c-string
+
+// (note: both c_str and data members of string are equivalent)
+
+int numbers[5];
+  int * p;
+  p = numbers;  *p = 10;
+  p++;  *p = 20;
+  p = &numbers[2];  *p = 30;
+  p = numbers + 3;  *p = 40;
+  p = numbers;  *(p+4) = 50;
+  for (int n=0; n<5; n++)
+    cout << numbers[n] << ", ";
+
+    *p++   // same as *(p++): increment pointer, and dereference unincremented address
+*++p   // same as *(++p): increment pointer, and dereference incremented address
+++*p   // same as ++(*p): dereference pointer, and increment the value it points to
+(*p)++ // dereference pointer, and post-increment the value it points to
+
+
+int * foo;
+foo = new int [5];
+
+enum class Colors: char {black, blue, green, cyan, red};
+Colors mycolor;
+
+mycolor = Colors::blue;
+if (mycolor == Colors::green) mycolor = Colors::red;
+
+}
+
+Special Members:
+
+Member function             	typical form for class C:
+
+Default constructor	             C::C();
+Destructor	                     C::~C();
+Copy constructor	             C::C (const C&);
+Copy assignment	                 C& operator= (const C&);
+Move constructor	             C::C (C&&);
+Move assignment	                 C& operator= (C&&);
+
+If no access level is specified for the inheritance, the compiler assumes private
+for classes declared with keyword class and public for those declared with struct.
+
+Virtual members
+A virtual member is a member function that can be redefined in a derived class,
+while preserving its calling properties through references. The syntax for a
+function to become virtual is to precede its declaration with the virtual keyword.
+
+C++ casts: http://www.cplusplus.com/doc/tutorial/typecasting/
   - static_cast:  operations are considered safe.
   - reinterpret_cast<type>: Highly unsafe
   - dynamic_cast <type>: Used with classes.
   - const_cast <type>: Cast away const-ness.
+
+
+http://www.cplusplus.com/doc/tutorial/exceptions/
+
+http://www.cplusplus.com/doc/tutorial/preprocessor/
+http://www.cplusplus.com/doc/tutorial/files/
+
+Lambda functions: https://www.cprogramming.com/c++11/c++11-lambda-closures.html

@@ -1,9 +1,13 @@
+Nice read for refreshing VIM tricks: https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
+Vim no plugin (How to Do 90% of What Plugins Do (With Just Vim)): https://www.youtube.com/watch?v=XA2WjJbmmoM
+
+-----------------------------------------------------------------------------------------------------------------
 Open file in read only mode:
 	vim -R file_name
 	or vim -M file_name
 
+-----------------------------------------------------------------------------------------------------------------
 VIM Search and replace : http://vim.wikia.com/wiki/Search_and_replace
-
 Basic search and replace:
 	:%s/foo/bar/g		Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
 	:s/foo/bar/g		Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
@@ -12,7 +16,7 @@ Basic search and replace:
 	:%s/foo/bar/gci		Change each 'foo' (case insensitive due to the i flag) to 'bar'; ask for confirmation.
 	:%s/foo/bar/gcI		Change each 'foo' (case sensitive due to the I flag) to 'bar'; ask for confirmation.
 	:5,12s/foo/bar/g	Change each 'foo' to 'bar' for all lines from line 5 to line 12 (inclusive).
-
+-----------------------------------------------------------------------------------------------------------------
 To comment out blocks in vim:
 	press Esc (to leave editing or other mode)
 	hit ctrl+v (visual block mode)
@@ -37,7 +41,7 @@ To comment out blocks in vim:
 
     Give it a second to work.
 
-------------------
+-----------------------------------------------------------------------------------------------------------------
 Source: http://www.linuxjournal.com/magazine/vim-c-programmers
 While editing a file with VIM, these command do their regular jobs.
 :pwd  :cd
@@ -49,6 +53,7 @@ While editing a file with VIM, these command do their regular jobs.
 ]]        --> Skip multiple functions fast. Use [[ to browse backwards.
 :se list  --> Check which whitespaces are tabs. Whatever displayed as ^I in blue are tabs.
 :se hlsearch -> TO highlight searches
+set incsearch           " search as characters are entered
 :se nohlsearch -> To turn off highlighting
 
 
@@ -66,11 +71,19 @@ Map keys <F7> to :tabp and <F8> to :tabn, write the below two lines in .vimrc fi
 :map <F7> :tabp<CR>
 :map <F8> :tabn<CR>
 
+Open the explorer in a horizontal ( :Sexplore ) or vertical ( :Vexplore ) split and exit the explorer using :q
+Open the explorer in another tabpage using :Texplore and exit using :q
+
+save and restore those tab sessions
+:mksession header-files-work.vim
+vim -S header-files-work.vim or :source header-files-work.vim
+:mks!  save that back
+-----------------------------------------------------------------------------------------------------------------
 BOOKMARK cursor position:
 Go to some line you want to bookmark by :22 and enter mb in command mode.
 b is the name of line number 22. You can navigate to 22 by simple typing 'b
 in command mode. (single quote + <mark name>)
----------------
+-----------------------------------------------------------------------------------------------------------------
 Selecting a text
 
 V       - selects entire lines
@@ -83,27 +96,29 @@ After selecting the text, try d to delete, or y to copy, or :s/match/replace/, o
 u -> undo
 CTRL + r -> redo
 
------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 Text folding:
-:set foldmethod=indent -> Nicely indents code blocks.
+
+set foldmethod=indent -> Nicely indents code blocks.
 zj and zk move the cursor to next and previous folds.
+
 At the cursor,
-za (toggle), zc (close), zo (open)  : One level of folding
-zA (toggle), zC (close), zO (open)  : All folding levels
+	za (toggle), zc (close), zo (open)  : One level of folding
+	zA (toggle), zC (close), zO (open)  : All folding levels
 
 Throughout the file:
-zm increases the foldlevel by one.
-zM closes all open folds.
-zr decreases the foldlevel by one.
-zR decreases the foldlevel to zero -- all folds will be open.
+	zm increases the foldlevel by one.
+	zM closes all open folds.
+	zr decreases the foldlevel by one.
+	zR decreases the foldlevel to zero -- all folds will be open.
 
 [z move tho start of open fold.
 ]z move to end of open fold.
------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
 
-:set expandtab      -> To insert space characters whenever the tab key is pressed
-:set tabstop=4      ->
-:set shiftwidth=4   -> To change the number of space characters inserted for indentation
+set expandtab      -> To insert space characters whenever the tab key is pressed
+set tabstop=4      ->
+set shiftwidth=4   -> To change the number of space characters inserted for indentation
 set number
 set relativenumber
 set autoindent
@@ -130,7 +145,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+==========================================
+Editor shortcuts:
 
+Change character case: Use ~
 
 =======
 :set autoindent
@@ -139,16 +157,22 @@ autocmd BufWinLeave * call clearmatches()
 :set number
 :set relativenumber
 :set hlsearch
+:syntax on
 -----------------------------------------
-Nice read for refreshing VIM tricks:
-https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim
 
 --------------------------
 SHIFTING blocks visually
 In normal mode: >> to indent the current line , or << to unindent.
 In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
-CSCOPE https://a0gustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
+CSCOPE http://cscope.sourceforge.net/cscope_vim_tutorial.html
+https://agustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
+
+Type "CTRL-\ s" (Control-backslash, then just 's'). you can hit "CTRL-t"
+Try the same search, but this time via "CTRL-spacebar s". This time, your Vim window will split in two horizontally , and the Cscope search result will be put in the new window. [if you've never used multiple Vim windows before: move between windows via 'CTRL-W w' (or CTRL-W arrow key, or CTRL-W h/j/k/l for left/up/down/right), close a window via 'CTRL-W c' (or good old ':q'), make the current window the only one via 'CTRL-W o', split a window into two via 'CTRL-W s' (or 'CTRL-W v' for a vertical split), open a file in a new window via ':spl[it] filename']
+
+Stick the line below to make F3 work as "CTRL-\ s" either in .virmrc or the cscope plugin file downloaded from the above url
+nmap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
 c: Find functions calling this function
 d: Find functions called by this function
@@ -167,6 +191,7 @@ Ctrl + O ->
 g; -> To move back in the list of your previous edit locations.
 g. -> To move forward in the list of your edit locations.
 
+Created and completed a new MCM https://mcm.amazon.com/cms/MCM-30432517 in favor of the old one
 
 :set paste -> to fix the weird Ctrl-v when pasting in VIM.
 
@@ -178,36 +203,4 @@ au VimEnter * if &diff | execute 'windo set wrap' | endif
 
 :set mouse=a  # Enable mouse support where the underlying system supports it.
 
-
----------- TMUX --------------------
-http://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
-
-session -> window -> pane
-tmux new -s session_name    --> Create a new session
-tmux ls                     --> List all the sessions
-tmux a                      --> Attach to the first session 
-tmux a -t session_name      --> Attach to session_name
-tmux detach  || CTRL-b d    --> Detach the session
-tmux kill-session -t session_name  --> kill a tmux session
-tmux rename-session -t old_name new_name
-
------
-CTRL-b ?   --> Help
-CTRL-b z   --> Go fullscreen, Hit CTRL-b z again to shrink it back.
-C-b C-<arrow key>: Resize pane in direction of <arrow key>  --> "This is an interesting one. Yes, you need Ctrl in your prefix and also your command key. I find it easiest to only release the b key after the prefix key and keep Ctrl pressed all the time while I hit the arrow key repeatedly."
-CTRL-b space-bar  -> change the orientation of panes from horizontal to vertical and vice-versa
-CTRL-b %  -> Split into two panes, vertically
-CTRL-b "  -> Split into two panes, horizontally
-
-Navigating between panes:
-CTRL-b <arrow-keys>  or CTRL-B   --> Rotate between panes
-CTRL-d or exit --> close a window or pane
-
-
--- Windows --
-CTRL-b c  --> Create a new window
-CTRL-b p --> switch to previous window
-CTRL-b n --> switch to next window
-
----------------- Screen commands ---------------
-screen -S sessionname
+Preserve last editing position in VIM https://stackoverflow.com/a/7894493/4608878

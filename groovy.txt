@@ -1,0 +1,69 @@
+ava.lang.Byte
+java.lang.Short
+java.lang.Integer
+java.lang.Long
+java.lang.Float
+java.lang.Double
+
+def range = 1..10;
+
+def mymap = [1:2, 3:4];
+
+Method with closures: find(), findAll(), any(), every(), collect()
+
+class Example {
+   static void main(String[] args) {
+
+        def mymap = [1:2, 3:4];
+
+        mymap[44] = 34;
+        println(mymap);
+        println(mymap[44]);
+
+        Set stringset = ["sdfsdf", 3, "safsdf", 3];
+        def stringlist = [1, 2, 3, 3];
+        println(stringset);
+        println(stringlist);
+
+        def clos = {println("hello world");}
+        clos.call();
+
+        def named_clos = {name -> println("Hello  ${name}");}
+        named_clos.call("Pritesh");
+
+        def it_clos = {println("Hello ${it}");}
+        it_clos.call("sdkfsd");
+
+
+        def lst = [11, 12, 13, 14];
+        lst.each {println it};
+
+
+        mymap.each({println(it.key + it.value)});
+
+        mymap.each{if (it.key % 2 == 0) {println("Greater"); println("MADHAV");}}
+
+        def mylst = [1,2,3,4,5];
+        def value;
+        value = mylst.find({element -> element > 2});
+        println(value);
+   }
+}
+class Example {
+   static void main(String[] args) {
+      try {
+         def arr = new int[3];
+         arr[5] = 5;
+      }catch(ArrayIndexOutOfBoundsException ex) {
+         println(ex.toString());
+         println(ex.getMessage());
+         println(ex.getStackTrace());
+      } catch(Exception ex) {
+         println("Catching the exception");
+      }finally {
+         println("The final block");
+      }
+
+      println("Let's move on after the exception");
+   }
+}

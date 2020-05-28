@@ -1,0 +1,61 @@
+# 1 --------------------------------------------------------------------------------------------
+
+# SDE Tips: CD common dirs   https://www.datascienceworkshops.com/blog/quickly-navigate-your-filesystem-from-the-command-line/
+# FOR MAC: ~/.bash_profile
+
+export MARKPATH=$HOME/.marks
+function jump {
+	cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark {
+	mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark {
+	rm -i "$MARKPATH/$1"
+}
+
+function marks {
+	\ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+}
+
+function _jump {
+      local cur=${COMP_WORDS[COMP_CWORD]}
+      local marks=$(find $MARKPATH -type l | awk -F '/' '{print $NF}')
+      COMPREPLY=($(compgen -W '${marks[@]}' -- "$cur"))
+      return 0
+    }
+complete -o default -o nospace -F _jump jump
+
+# 2 --------------------------------------------------------------------------------------------
+# Use iTerm2 to 'keep an eye' on already running process
+
+Install Shell Integration under iTerm2 > Install Shell Integration, on every terminal session you own like your DevDesktop and local machine.
+
+Before or during command execution press  ⌥ + ⌘ + A or Edit -> Marks and Annotations -> Alerts -> Alert on next mark.
+
+iTerm will let you know the Alarm has been activated with ‘keep an eye’ in terminal top-right.
+
+# 3 --------------------------------------------------------------------------------------------
+# Use fc command in the linux shell to fix and rerun your   last  run command
+
+echo “hello world!”
+fc
+
+# 4 --------------------------------------------------------------------------------------------
+Problem: Every time i do an Intellij's auto-import feature, it clubs all the java.util.xx imports. to java.util.*
+
+Solution:
+You can control this behavior under at Settings > Editor > Code Style > Java > Imports.
+The options are {Class,Names} count to use (static) import with '*'.
+Setting this to 999 effectively disables this feature.
+
+# 5 --------------------------------------------------------------------------------------------
+Problem: Little bouncy apps in MacOs dock screaming for attention. How to shut them up?
+https://osxdaily.com/2010/02/19/disable-dock-bouncing/
+
+$ defaults write com.apple.dock no-bouncing -bool TRUE
+Hit return, then enter the following command to restart the Dock:
+$ killall Dock
+# Hit return again for changes to take effect by relaunching the Dock.
+
+# 6 --------------------------------------------------------------------------------------------

@@ -97,6 +97,8 @@ git config --global core.excludesfile ~/.gitignore_global
 Ignoring tracked files:
 $> git rm --cached filename
 $> git commit -m ""
+Ignoring tracked directory:
+$> git rm --cached -r directory_path
 
 Tracking empty directory: Well you can't :P But if you really want to, then keep a tiny file and name it ".gitkeep". This name (gitkeep) is just a convention.
 If you are a narcissist, then name it after yourself.
@@ -258,7 +260,14 @@ git config --global alias.d difftool
 
 
 Git Squash the commits into one  http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
+dev-dsk % git logp -n 10
+* 164b7021 (HEAD -> mainline) Fix Neptune canary cluster identifier format
+* 4d9c57d2 Fix typo in validationConstant
+* 4d9c57d2 Fix typo in validationConstant
+* d6d9e075 (origin/mainline, origin/HEAD) Adding storagenode validator to instance replacement tool
+
 > git rebase -i HEAD~3
+
 https://stackoverflow.com/questions/134882/undoing-a-git-rebase
 
 Something gone bad? Try git reflog.  http://effectif.com/git/recovering-lost-git-commits

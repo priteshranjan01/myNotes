@@ -175,3 +175,15 @@ Behavioral: Best practice of object interaction. Think - Mehods and their signat
 1. Observer:
 2. Visitor:
 3. Iterator:
+
+
+
+------------------------- SETUP Pyenv ----------------------------------------
+MacOs:
+
+$ brew update
+$ brew install pyenv
+$ pyenv install 3.7.3
+$ echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.bash_profile
+$ which python
+$ python global|shell|local 3.7.3 
