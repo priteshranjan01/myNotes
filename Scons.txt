@@ -1,0 +1,58 @@
+#-*- mode: python -*-
+# vim: set filetype=python
+#
+# SCons User Guide: https://scons.org/doc/production/HTML/scons-user.html
+# Recommended SCons readings: http://pages.cs.wisc.edu/~driscoll/software/scons/guide-recommendations.html
+#
+# Program is a "builder" method, a Python call that tells SCons that you want to build an executable program.
+# Program('Point.cpp')  # This gives two information a: What you want to build (an executable program) and b. the input file from which you want it build (Point.cpp)
+# or if you want the target name to be something else than "point" then specify this
+# Program('someother_target_name', 'Point.cpp')
+
+# Compile multiple source files. The executable name will be deduced from the first file name.
+# Program(['lambda1.cpp', 'pointer.cpp'])  # This won't build because both files have a main function'. However multiple calls to Program will be OK.
+# Similarly
+# Program('someother_target_name', ['a.cpp', 'b.cpp'])
+
+# On a POSIX compliant system like Linux or Unix do this
+# scons
+
+# To clean up after a build, just invoke scons -c . Unlike scons doesn't need a cleanup target
+# scons -c
+
+# Quiet scons
+# scons -Q
+
+# The SConstruct file:
+#   1. is equivalent of Makefile in Make build system.
+#   2. is a Python script.
+#   3. has SCons functions which are order-independent. i.e. the order in which the SCons functions are called in the SConstruct file does not affect the order in which SCons actually builds the programs and object file you want it to build.
+
+# Makind a list of files with Glob
+# Program('program', Glob('*.cpp'))
+
+# Split function. Similar to python split()
+# src_files = Split('main.cpp file1.cpp file2.cpp')
+# Program(target = 'program', source = src_files)
+#
+# Building libraries:
+#   Library('foo', ['f1.c', 'f2.c'])
+#   StaticLibrary('foo', ['f1.c', 'f2.c'])
+#   SharedLibrary('foo', ['f1.c', 'f2.c'])
+# Linking Libraries
+#   Program('prog.c', LIBS=['foo', 'bar'], LIBPATH='.')
+#   Program('prog.c', LIBS = 'm', LIBPATH = ['/usr/lib', '/usr/local/lib'])
+
+env = Environment()
+# Get SCons to find my #include files: Implicit Dependencies
+boost_world = env.Program('boost_world', 'boost_world.cpp', CPPPATH='/Users/pritesr/madhav/cpp101/boost_1_73_0/')
+
+# Install function
+env.Install('/Users/pritesr/madhav/cpp101/', boost_world)
+env.Alias('install', '/Users/pritesr/madhav/cpp101/')
+
+# Install hello_world binary in /Users/pritesr/madhav/cpp101/ with this command
+# scons install
+#
+# The top-level SConstruct file can use the SConscript function to include other subsidiary scripts in the build. These subsidiary scripts can, in turn, use the SConscript function to include still other scripts in the build. By convention, these subsidiary scripts are usually named SConscript.
+#

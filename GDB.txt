@@ -1,0 +1,8 @@
+http://www.brendangregg.com/blog/2016-08-09/gdb-example-ncurses.html
+
+>> core dumps
+# gdb path/to/program/executable path/to/core/dump
+
+(gdb) bt
+
+Read from bottom up, to go from parent to child. The "??" entries are where symbol translation failed.

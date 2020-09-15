@@ -6,6 +6,11 @@ Open file in read only mode:
 	vim -R file_name
 	or vim -M file_name
 
+Open multiple files in different tabs.
+	vim -p path/to/file1 path/to/file2
+
+If there are multiple files with names following same pattern then you can also use regex.
+	vim -p path/to/file*
 -----------------------------------------------------------------------------------------------------------------
 VIM Search and replace : http://vim.wikia.com/wiki/Search_and_replace
 Basic search and replace:
@@ -166,7 +171,6 @@ In normal mode: >> to indent the current line , or << to unindent.
 In Inset mode: Ctrl + T indents the current line and Ctrl-D unindents.
 
 CSCOPE http://cscope.sourceforge.net/cscope_vim_tutorial.html
-https://agustinus.wordpress.com/2013/06/01/browsing-source-code-in-linux-vimcscope/
 
 Type "CTRL-\ s" (Control-backslash, then just 's'). you can hit "CTRL-t"
 Try the same search, but this time via "CTRL-spacebar s". This time, your Vim window will split in two horizontally , and the Cscope search result will be put in the new window. [if you've never used multiple Vim windows before: move between windows via 'CTRL-W w' (or CTRL-W arrow key, or CTRL-W h/j/k/l for left/up/down/right), close a window via 'CTRL-W c' (or good old ':q'), make the current window the only one via 'CTRL-W o', split a window into two via 'CTRL-W s' (or 'CTRL-W v' for a vertical split), open a file in a new window via ':spl[it] filename']
@@ -174,15 +178,29 @@ Try the same search, but this time via "CTRL-spacebar s". This time, your Vim wi
 Stick the line below to make F3 work as "CTRL-\ s" either in .virmrc or the cscope plugin file downloaded from the above url
 nmap <F3> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-c: Find functions calling this function
-d: Find functions called by this function
-e: Find this egrep pattern
-f: Find this file
-g: Find this definition
-i: Find files #including this file
-s: Find this C symbol
-t: Find this text string
-:
+""""""""""" My cscope/vim key mappings
+
+The following maps all invoke one of the following cscope search types:
+Hit CTRL \ to enter cscope and then issue command for ex. 's'.
+
+  's'   symbol: find all references to the token under cursor
+  'g'   global: find global definition(s) of the token under cursor
+  'c'   calls:  find all calls to the function name under cursor
+  't'   text:   find all instances of the text under cursor
+  'e'   egrep:  egrep search for the word under cursor
+  'f'   file:   open the filename under cursor
+  'i'   includes: find files that include the filename under cursor
+  'd'   called: find functions that function under cursor calls
+
+""""""""""" Ctags key mappings """""""""
+ctags for a cpp project:
+	ctags --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++
+
+^]	Jump to definition
+^t	Jump back from definition
+^W}	Preview definition
+g]	See all definitions
+
 ------ JUMPS -----
 `` -> goes to the same location on the line
 '' -> goes to the beginning of the line
@@ -190,8 +208,6 @@ Ctrl + I ->
 Ctrl + O ->
 g; -> To move back in the list of your previous edit locations.
 g. -> To move forward in the list of your edit locations.
-
-Created and completed a new MCM https://mcm.amazon.com/cms/MCM-30432517 in favor of the old one
 
 :set paste -> to fix the weird Ctrl-v when pasting in VIM.
 
@@ -204,3 +220,28 @@ au VimEnter * if &diff | execute 'windo set wrap' | endif
 :set mouse=a  # Enable mouse support where the underlying system supports it.
 
 Preserve last editing position in VIM https://stackoverflow.com/a/7894493/4608878
+
+
+Close select buffers
+
+
+
+##################  The Silver Searcher #######################################
+
+http://conqueringthecommandline.com/book/ack_ag
+
+ag search_term
+ag -Q "Literal(search)"
+ag search_term /path/to/search/for
+ag search_term -l    # Just list the file names
+ag search_term -i    # case insensitive
+ag search_term -G cpp  # Search in files with names containing cpp
+ag search_term -G cpp$  # search in files with names ending in cpp
+ag readme -l --ignore-dir=railties/lib
+ag readme -l --ignore-dir=railties/lib --ignore-dir=guides/code
+
+
+# limited Regex Search
+ag search_term_at_the_end_of_a_line$
+
+################## END The Silver Searcher #######################################

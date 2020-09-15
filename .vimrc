@@ -1,7 +1,8 @@
 source $VIMRUNTIME/defaults.vim
 
 " https://w.amazon.com/bin/view/Users/Derebolt/vim-code-browser/ Generate
-" code.amazon.com url from inside VIM.
+" code.amazon.com url from inside VIM. Just type :LinkToCodeBrowser or the
+" smallest which will not be ambiguous. As of today just :Li is sufficient
 source ~/.vim/plugin/LinkToCodeBrowser.vim
 
 """"""""" COPIED From Vundle repository: https://github.com/VundleVim/Vundle.vim
@@ -15,29 +16,31 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-k
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
 
 " Pritesh: The plugins I have added.
 
 "1. https://github.com/octol/vim-cpp-enhanced-highlight
+" DISABLED
 "Plugin 'octol/vim-cpp-enhanced-highlight'
 
 "2. The NERDTree is a file system explorer for the Vim editor
 "
 Plugin 'preservim/nerdtree'
 
-"3.
+"3. DISABLED
 "Plugin 'valloric/youcompleteme'
 
 "4 Git commands from vim. https://vimawesome.com/plugin/fugitive-vim
 Plugin 'tpope/vim-fugitive'
+
+"5 ack.vim plugin to use the silver searcher tool. https://github.com/mileszs/ack.vim
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,7 +62,7 @@ filetype plugin on
 " Plugin specific commands:
 
 " NERDTree plugin options.
-"autocmd vimenter * NERDTree                    " Open nerdTree by default.
+" autocmd vimenter * NERDTree                    " Open nerdTree by default.
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -94,12 +97,13 @@ syntax enable                                   " enable syntax processing
 
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
-map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+" Remapped F2 for ctag
+" map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 
 set number                                      " show line numbers
 set showcmd                                     " show command in bottom bar on the very bottom right
 set relativenumber
-set cursorline                                  " highlight current line
+" set cursorline                                  " highlight current line
 filetype indent on                              " load filetype-specific indent files
 set wildmenu                                    " visual autocomplete for command menu
 set lazyredraw                                  " redraw only when we need to.
@@ -109,15 +113,15 @@ set hlsearch                                    " Highlight matches
 set incsearch                                   " search as characters are entered
 set ignorecase                                  " Do case insensitive search
 
+set expandtab                                   " tabs are spaces
 set tabstop=4                                   " number of visual spaces per TAB
 set softtabstop=4                               " number of spaces in tab when editing
-set expandtab                                   " tabs are spaces
 set shiftwidth=4
 
 set autoindent
 set foldenable                  " enable folding
 " set foldlevelstart=10          " open most folds by default
-set foldlevelstart=2          " By default fold everything for level>=2
+set foldlevelstart=5          " By default fold everything for level>=2
 set foldnestmax=10              " 10 nested fold max
 " space open/closes folds
 nnoremap <space> za
@@ -141,3 +145,37 @@ nnoremap E $
 nnoremap gV `[v`]
 
 let mapleader=","               " leader is comma
+
+set mouse-=a    " The first line of this vimrc enables all default options. In
+                " default option double click takes you to VISUAL mode. I
+                " don't like this. I have iterm configured to copy for double
+                " click. set mouse-=a disables that.
+
+" Increase the current vsplit size by 10 cursor positions
+nnoremap <silent> <Leader>= :exe "vertical resize +10" <CR>
+nnoremap <silent> <Leader>- :exe "vertical resize -10" <CR>
+
+
+" https://stackoverflow.com/questions/2169645/vims-autocomplete-is-excruciatingly-slow/2460593
+set complete-=i
+
+" Display the current file name at the bottom
+set laststatus=2
+
+" Use the silver searcher (Ag) with ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Map F2 to search the work under cursor with ctags.
+nmap <F2> <C-]>
+
+" Autoclose curly braces. https://stackoverflow.com/a/34992101/4608878
+" NOTE: This autocomplete in insert mode, provided set paste is not set.
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O

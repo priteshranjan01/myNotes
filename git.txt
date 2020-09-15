@@ -141,6 +141,8 @@ $> git log SHA_of_the_first_commit SHA_of_the_second_commit
 $> git diff --ignore-space_change SHA_of_the_first_commit..HEAD  # or use -b instead of '--ignore-space_change'
 --ignore-all-space or just -w
 
+Compare the same file in 2 branches:
+$> git diff branch1 branch2 myfile.cs
 
 GIT Branching:
 $> git branch  # this will list all the branches currently present
@@ -161,7 +163,7 @@ $> git branch -r --merged #
 Renaming branches:
 $> git branch --move old_branch_name new_branch_name  # -m instead of --move will be fine too
 
-Deleting branches:
+Deleting branches: branch delete
 $> git branch --delete name_of_branch  # -d will work in place of --delete  # If there are non-merged changes, then it will fail.
 $> git branch -D name_of_branch  # This is not a request, it's an order. Delete this branch. Non-merged changes will be lost.
 
@@ -216,7 +218,11 @@ $> git remote -v  # verify that push and pull repositories are different
  Cloning a remote repository:
  $> git clone https://github.com/priteshranjan01/myNotes.git name_of_the_directory_in_which_to_store_files
  NOTE: if you want to checkout a particular branch, give '-b' option with 'git clone'
- Tracking remote branches: Google it, I am in a hurry.
+ Make an existing branch track a remote branch:
+        git branch -u origin/foo
+    Or, if local branch foo is not the current branch:
+        git branch -u origin/foo foo
+
  Pushing a non-tracking branch: $> git push origin non_tracking_branch
 
  Pushing changes to the remote repository:
@@ -315,3 +321,8 @@ $> git add -p # to go directly in patch mode.
 
 git subtree push --prefix=<subdirectory_to_push> <Remote_name> <branch_name_on_the_target_repository>
 git subtree push --prefix=ngs_sdk csvc_ngs_sdk update_from_ngs_automation
+
+# git cherry-pick --abort
+
+# Git patch apply https://stackoverflow.com/questions/2249852/how-to-apply-a-patch-generated-with-git-format-patch
+git apply name-of-file.patch

@@ -59,3 +59,8 @@ $ killall Dock
 # Hit return again for changes to take effect by relaunching the Dock.
 
 # 6 --------------------------------------------------------------------------------------------
+Use c++filt to unmangle java and c++ compiler names:
+dev-dsk-pritesr-2c-751b7448 % c++filt -n _ZN6Grover29g_GroverErrorCategoryInstanceE
+Grover::g_GroverErrorCategoryInstance
+
+# 7 --------------------------------------------------------------------------------------------

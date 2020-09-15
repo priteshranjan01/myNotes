@@ -8,7 +8,7 @@ pkill -9 postgres
 
 
 Connecting:
-psql -U rdsadmin -h 10.66.138.62
+psql -U rdsadmin -h $PRIVATE_IP_ADDR
 
 Help
 # help
@@ -31,6 +31,15 @@ Disconnecting:
 \dt: list all tables in the current database using your search_path
 \dt *.: list all tables in the current database regardless your search_path
 \dt *.* List tables in all schemas.
-\dt test.*  List tables in the schema named test. 
+\dt test.*  List tables in the schema named test.
 \d tablename  : Describe table.
 \dn list all the schemas in a database.
+
+
+create database testdb1;
+
+\c testdb1;
+
+create table role(role_id serial, role_name varchar (255) not null);
+
+insert into role (role_id, role_name) values (1, 'ad');
